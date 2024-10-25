@@ -5,3 +5,7 @@
   text-align: center;
   cursor: pointer;
 }
+.MainButton__disabled {
+  cursor: auto;
+  opacity: 0.4;
+}

@@ -15,7 +15,9 @@ const ExpenseLine = ({params}: ExpenseProps) => {
       </div>
       <span className={classes.ExpenseLine_name}>{params.name}</span>
       <span className={classes.ExpenseLine_amount}>{params.amount}</span>
-      <span className={classes.ExpenseLine_date}>{params.date}</span>
+      <span className={classes.ExpenseLine_date}>
+        {new Date(params.date).toTimeString()}
+      </span>
       <div className={classes.ExpenseLine_menuButton}>
         {/* menu button (delete/repeat/edit) */}
       </div>

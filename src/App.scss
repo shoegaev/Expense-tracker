@@ -1,3 +1,4 @@
+@import "./variables.scss";
 * {
   margin: 0;
   padding: 0;
@@ -5,6 +6,9 @@
 }
 a {
   text-decoration: none;
+}
+body {
+  background-color: $color-body;
 }
 .App {
   margin-left: auto;
@@ -15,4 +19,3 @@ a {
   border: 1px solid black;
   max-width: 1440px;
 }
-

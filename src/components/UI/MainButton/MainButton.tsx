@@ -3,12 +3,17 @@ import classes from "./MainButtonStyle.module.scss";
 
 type MainButtonProps = {
   text: string;
+  isDisabled?: boolean;
   callback: () => void;
 };
 
-const MainButton = ({text, callback}: MainButtonProps) => {
+const MainButton = ({text, callback, isDisabled}: MainButtonProps) => {
   return (
-    <div onClick={callback} className={classes.MainButton}>
+    <div
+      onClick={() => {
+        if (!isDisabled) callback();
+      }}
+      className={`${classes.MainButton} ${isDisabled ? classes.MainButton__disabled : ""}`}>
       <span className={classes.MainButton_text}>{text}</span>
     </div>
   );
