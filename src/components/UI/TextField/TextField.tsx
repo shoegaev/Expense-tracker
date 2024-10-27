@@ -16,15 +16,6 @@ interface TextFieldProps {
     validations: {message: string; callbak: (value: string) => boolean}[];
   };
 }
-// состояния валидности:
-//  {message: null, isValid: false} - данные в инпуте не валидны но не показывается
-// уведомление об неавлидности данных (например когда инпут пуст).
-//  {message: string, isValid: false} - данные в инпуте не валидны, и показывается сообщение
-// с ошибкой 
-//  {message: null, isValid: true} - данные валидны, сообщение не показывается
-
-
-
 
 const TextField = ({
   className,

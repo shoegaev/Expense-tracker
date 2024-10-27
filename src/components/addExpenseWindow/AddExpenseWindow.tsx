@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Expense} from "../../../types/appDataType";
-import TextField from "../TextField/TextField";
+import { Expense } from "../../types/appDataType";
+import TextField from "../UI/TextField/TextField";
 import cl from "./AddExpenseWindowStyle.module.scss";
-import MainButton from "../MainButton/MainButton";
+import MainButton from "../UI/MainButton/MainButton";
 
 export interface AddExpenseWindowState extends Expense {
   isDataValid: boolean;

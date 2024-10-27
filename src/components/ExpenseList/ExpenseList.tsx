@@ -1,11 +1,11 @@
 import React from "react";
 import classes from "./ExpenseListStyle.module.scss";
-import {AppData, Expense} from "../../../types/appDataType";
-import ExpenseLine from "../ExpenseLine/EpxenseLine";
+import {AppData, Expense} from "../../types/appDataType";
+import ExpenseLine from "./ExpenseLine/EpxenseLine";
 import {
   ExpenseListOptions,
   ExpenseListSorting,
-} from "../../../types/sortsAndFiltersType";
+} from "../../types/sortsAndFiltersType";
 
 type ExpenseListProps = {
   appState: AppData;

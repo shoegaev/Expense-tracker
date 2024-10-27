@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import {AppData, Expense} from "../types/appDataType";
-import ExpenseList from "../components/UI/ExpenseList/ExpenseList";
+import ExpenseList from "../components/ExpenseList/ExpenseList";
 import pagesCl from "./PagesStyles.module.scss";
 import cl from "./HistoryPagesStyle.module.scss";
 import MainButton from "../components/UI/MainButton/MainButton";
 import AddExpenseWindow, {
   AddExpenseWindowState,
-} from "../components/UI/addExpenseWindow/AddExpenseWindow";
+} from "../components/addExpenseWindow/AddExpenseWindow";
 
 type HistoryPageProps = {
   appState: AppData;
