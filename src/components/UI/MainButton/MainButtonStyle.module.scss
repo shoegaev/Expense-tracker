@@ -1,8 +1,11 @@
+@import "../../../variables.scss";
 .MainButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  @include centeredContent;
+  min-width: 110px;
+  height: 40px;
+  color: $color-headerBackground;
+  padding: 0px 5px;
+  background-color: $color-interfaceDark;
   cursor: pointer;
 }
 .MainButton__disabled {

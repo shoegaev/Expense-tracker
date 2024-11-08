@@ -1,19 +1,69 @@
+@import "../../../variables.scss";
+$sizeButtonWidth: 60px;
 .ExpenseLine {
-  display: flex;
-  gap: 5px;
-  .ExpenseLine_color {
-    
-  }
-  .ExpenseLine_name {
+  width: 100%;
+  position: relative;
+  transition: height 0.2s linear;
+  height: 40px;
+  flex-shrink: 0;
+  overflow-y: hidden;
 
-  }
-  .ExpenseLine_amount {
+  .ExpenseLine_content {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - $sizeButtonWidth);
+    padding: 12px;
+    background-color: $color-interfaceBright;
 
+    .ExpenseLine_topContent {
+      width: 100%;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 0.5fr 4fr 1fr 2fr 1fr;
+      .ExpenseLine_color {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: rgba(0, 170, 255, 0.534);
+      }
+      .ExpenseLine_name {
+      }
+      .ExpenseLine_amount {
+      }
+      .ExpenseLine_date {
+      }
+      .ExpenseLine_menuButton {
+      }
+    }
   }
-  .ExpenseLine_date {
-    
+  .ExpenseLine_bottomContent {
+    .ExpenseLine_categoryLine,
+    .ExpenseLine_descriptionLine {
+      display: flex;
+      padding-left: 5.8%;
+      .ExpenseLine_categoryLineHeading,
+      .ExpenseLine_descriptionLineHeading {
+      }
+      .ExpenseLine_categoryLineContent,
+      .ExpenseLine_descriptionLineContent {
+      }
+    }
   }
-  .ExpenseLine_menuButton {
-    
+  .ExpenseLine_sizeButton {
+    width: 28px;
+    height: 28px;
+    border-radius: 14px;
+    background-color: $color-interfaceDark;
+
+    position: absolute;
+    right: 15px;
+    bottom: 6px;
+    cursor: pointer;
+  }
+}
+.ExpenseLine.ExpenseLine__open {
+  height: auto;
+  
+  .ExpenseLine_content {
   }
 }

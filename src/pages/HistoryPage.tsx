@@ -23,12 +23,13 @@ const HistoryPage = (props: HistoryPageProps) => {
       descriprion: "",
       isDataValid: false,
     });
-
   return (
     <div className={`${pagesCl.Page} ${cl.HistoryPage}`}>
       <div className={cl.HistoryPage_mainContent}>
         <ExpenseList {...props}></ExpenseList>
-        <MainButton text="Add expense" callback={() => {}}></MainButton>
+        <div className={cl.HistoryPage_buttons}>
+          <MainButton text="Add expense" callback={() => {}}></MainButton>
+        </div>
       </div>
       <AddExpenseWindow
         AddExpenseWindowState={addExpenseWindowState}

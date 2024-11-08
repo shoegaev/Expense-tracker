@@ -6,6 +6,7 @@ import {
   ExpenseListOptions,
   ExpenseListSorting,
 } from "../../types/sortsAndFiltersType";
+import ExpenseListHeader from "./ExpenseListHeader/ExpenseListHeader";
 
 type ExpenseListProps = {
   appState: AppData;
@@ -52,7 +53,12 @@ const ExpenseList = ({
     );
   });
 
-  return <div className={classes.ExpenseList}>{ExpenseLines}</div>;
+  return (
+    <div className={classes.ExpenseList}>
+      <ExpenseListHeader />
+      <div className={classes.ExpenseList__list}>{ExpenseLines}</div>
+    </div>
+  );
 };
 
 export default ExpenseList;

@@ -1,19 +1,13 @@
 import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import {Outlet} from "react-router-dom";
 import classes from "./LayoutStyle.module.scss";
+import Header from "./Header/Header";
 
 const Layout = () => {
-
   return (
     <>
-      <header>
-        <nav>
-          <NavLink to="/history">History</NavLink>
-          <NavLink to="/category">Categories</NavLink>
-          <NavLink to="diagram">Diagram</NavLink>
-        </nav>
-      </header>
-      <main className={classes.contentForm}>
+      <Header />
+      <main className={classes.content}>
         <Outlet></Outlet>
       </main>
     </>

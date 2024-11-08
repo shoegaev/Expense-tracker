@@ -1,1 +1,22 @@
+// colors
 $color-body: rgb(225, 210, 207);
+$color-textBlack: black;
+$color-headerBackground: #ffffff;
+$color-mainBackground: #e7e7e7;
+$color-interfaceBright: #d6d7d8;
+$color-interfaceGrey: #adaeb2;
+$color-interfaceDark: #7f8084;
+
+// fontSizes
+$fontSize: 20px;
+
+// sizes
+$headerHeigth: 72px;
+$contentMaxHeigth: 700px;
+
+// utils
+@mixin centeredContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
