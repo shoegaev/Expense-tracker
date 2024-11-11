@@ -9,10 +9,19 @@ $color-interfaceDark: #7f8084;
 
 // fontSizes
 $fontSize: 20px;
+$fontSizeSmall: 16px;
+$fontSize_850px: 18px;
+$fontSizeSmall_850px: 14px;
 
 // sizes
 $headerHeigth: 72px;
 $contentMaxHeigth: 700px;
+
+// padding
+$innerHorizontalPadding: 65px;
+$innerHorizontalPadding_1000px: 20px;
+$innerHorizontalPadding_850px: 10px;
+
 
 // utils
 @mixin centeredContent {

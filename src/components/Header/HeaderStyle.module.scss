@@ -4,7 +4,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 65px;
+  padding: 16px $innerHorizontalPadding;
   height: 72px;
   background-color: $color-headerBackground;
+}
+@media (max-width: 1000px) {
+  .Header {
+    padding: 16px $innerHorizontalPadding_1000px;
+  }
+}
+@media (max-width: 850px) {
+  .Header {
+    padding: 8px $innerHorizontalPadding_850px;
+  }
 }

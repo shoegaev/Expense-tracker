@@ -7,8 +7,21 @@
   padding: 0px 5px;
   background-color: $color-interfaceDark;
   cursor: pointer;
+  transition:
+    scale 0.2s ease,
+    opacity 0.2s ease;
 }
+
 .MainButton__disabled {
   cursor: auto;
-  opacity: 0.4;
+  opacity: 0.3;
+}
+
+@media (hover: hover) {
+  .MainButton:hover {
+    scale: 1.05;
+  }
+  .MainButton.MainButton__disabled:hover {
+    scale: 1;
+  }
 }

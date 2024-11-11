@@ -1,8 +1,74 @@
+@import "../../../variables.scss";
 .TextField {
+  display: grid;
+  grid-template-columns: 96px calc(100% - 96px);
+  align-items: center;
+  text-align: left;
+  .TextField__labelText {
+    word-wrap: break-word;
+  }
+  .TextField__textArea {
+    font-family: inherit;
+    height: 40px;
+    width: 280px;
+    background-color: $color-interfaceBright;
+    border: none;
+    font-size: $fontSize;
+    padding: 8px 6px 4px 6px;
+    resize: none;
+    overflow: hidden;
+  }
+  .TextField__textArea:focus {
+    outline: none;
+  }
+  .TextField__textArea::placeholder {
+    visibility: hidden;
+  }
 }
 
-.TextField__InvalidValid {
+.TextField_labelTextTop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 100%;
+  .TextField__labelText {
+    align-self: flex-start;
+  }
+  .TextField__textArea {
+    margin-left: 96px;
+    width: calc(100% - 96px);
+    height: 160px;
+  }
+}
+.TextField.TextField_error {
+  color: black;
 }
 
-.TextField__labelTextTop {
+@media (max-width: 800px) {
+  .TextField {
+    display: flex;
+    .TextField__labelText {
+      display: none;
+    }
+    .TextField__textArea::placeholder {
+      visibility: visible;
+    }
+  }
+
+  .TextField_labelTextTop {
+    align-items: center;
+    .TextField__textArea {
+      margin-left: 0;
+      width: 580px;
+    }
+  }
+}
+@media (max-width: 630px) {
+  .TextField {
+    width: 100%;
+    .TextField__textArea {
+      width: 100%;
+    }
+  }
 }

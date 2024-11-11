@@ -1,3 +1,70 @@
+@import "../../variables.scss";
 .AddExpenseWindow {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  gap: 24px;
+  position: relative;
+  .AddExpenseWindow__backButton {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: $color-interfaceDark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: scale 0.2s ease;
+
+    position: absolute;
+    left: 5px;
+    top: 5;
+    .AddExpenseWindow__backButtonIcon {
+      width: 60%;
+      height: 60%;
+    }
+  }
+  @media (hover: hover) {
+    .AddExpenseWindow__backButton:hover {
+      scale: 1.1;
+    }
+  }
+  .AddExpenseWindow__heading {
+    font-size: $fontSize;
+    font-weight: normal;
+    flex-shrink: 0;
+  }
+  .AddExpenseWindow__fields {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 40px;
+    row-gap: 24px;
+    overflow-y: scroll;
+  }
+  .AddExpenseWindow__fields > label:nth-child(-2n + 4) {
+    justify-self: end;
+  }
+  .AddExpenseWindow__fields > label:nth-child(5) {
+    margin-top: 20px;
+    grid-row-start: 3;
+    grid-row-end: 7;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .AddExpenseWindow__submitButton {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 630px) {
+  .AddExpenseWindow {
+    .AddExpenseWindow__fields {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

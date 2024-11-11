@@ -29,3 +29,8 @@ body {
   font-size: 20px;
   font-family: "Inter";
 }
+@media (max-width: 850px) {
+  .App {
+    font-size: $fontSize_850px;
+  }
+}
