@@ -18,3 +18,8 @@
     padding: 8px $innerHorizontalPadding_850px;
   }
 }
+@media (max-width: 500px) {
+  .Header {
+    padding: 6px $innerHorizontalPadding_500px;
+  }
+}

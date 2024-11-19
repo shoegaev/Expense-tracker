@@ -10,6 +10,7 @@ $color-interfaceDark: #7f8084;
 // fontSizes
 $fontSize: 20px;
 $fontSizeSmall: 16px;
+$fontSizeUnderline: 10px;
 $fontSize_850px: 18px;
 $fontSizeSmall_850px: 14px;
 
@@ -21,6 +22,7 @@ $contentMaxHeigth: 700px;
 $innerHorizontalPadding: 65px;
 $innerHorizontalPadding_1000px: 20px;
 $innerHorizontalPadding_850px: 10px;
+$innerHorizontalPadding_500px: 4px;
 
 
 // utils
@@ -28,4 +30,27 @@ $innerHorizontalPadding_850px: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+// scrollbar 
+@mixin scrollbar {
+  width: 8px;
+  background-color: $color-interfaceGrey;
+  border-radius: 4px;
+}
+
+@mixin scrollbarThumb {
+  background-color: $color-interfaceDark;
+  border-radius: 4px;
+}
+
+@mixin scrollbarSmall {
+  width: 4px;
+  background-color: transparent;
+  border-radius: 1px;
+}
+@mixin scrollbarThumbSmall {
+  background-color: $color-interfaceGrey;
+  border-radius: 1px;
 }

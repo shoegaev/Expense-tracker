@@ -8,12 +8,17 @@
   padding: 20px $innerHorizontalPadding;
 }
 @media (max-width: 1000px) {
-  .content  {
+  .content {
     padding: 20px $innerHorizontalPadding_1000px;
   }
 }
 @media (max-width: 850px) {
-  .content  {
+  .content {
     padding: 10px $innerHorizontalPadding_850px;
+  }
+}
+@media (max-width: 850px) {
+  .content {
+    padding: 5px $innerHorizontalPadding_500px;
   }
 }

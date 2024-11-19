@@ -1,6 +1,8 @@
 /* eslint-disable max-lines-per-function */
 import React, {FormEventHandler} from "react";
 import cl from "./TextFieldStyle.module.scss";
+import {ReactComponent as Asterisk} from "../../../assets/icons/Asterisk.svg";
+import {ReactComponent as ErrorIcon} from "../../../assets/icons/ErrorIcon.svg";
 
 interface TextFieldProps {
   className?: string;
@@ -12,6 +14,7 @@ interface TextFieldProps {
   labelTextPosition: "left" | "top";
   disabled?: boolean;
   validation?: {
+    isRequired: boolean;
     validationState: {isValid: boolean; errMessage: null | string};
     setValidationState: (state: {
       isValid: boolean;
@@ -40,36 +43,52 @@ const TextField = ({
   return (
     <label className={classes.join(" ")}>
       <span className={cl.TextField__labelText}>{labelText}</span>
-      <textarea
-        className={cl.TextField__textArea}
-        // type={type}
-        value={value}
-        wrap={labelTextPosition === "left" ? "off" : "hard"}
-        onInput={e => {
-          if (onInput) onInput(e);
-          const currValue = e.currentTarget.value;
-          setValue(currValue);
-          if (!validation) return;
-          if (currValue === "") {
-            validation.setValidationState({isValid: false, errMessage: null});
-            return;
-          }
-          let isDataValid = true;
-          let errMessage: null | string = null;
-          for (const value of validation.validations) {
-            if (!value.callbak(currValue)) {
-              isDataValid = false;
-              errMessage = value.message;
-              break;
-            }
-          }
-          validation.setValidationState({
-            isValid: isDataValid,
-            errMessage: errMessage,
-          });
-        }}
-        {...props}
-      />
+      <div className={cl.TextField__content}>
+        <div className={cl.TextField__field}>
+          {validation?.isRequired && (
+            <Asterisk className={cl.TextField__asterisk} />
+          )}
+          <textarea
+            className={cl.TextField__textArea}
+            // type={type}
+            value={value}
+            wrap={labelTextPosition === "left" ? "off" : "hard"}
+            onInput={e => {
+              if (onInput) onInput(e);
+              const currValue = e.currentTarget.value;
+              setValue(currValue);
+              if (!validation) return;
+              if (currValue.trim() === "") {
+                validation.setValidationState({
+                  isValid: !validation.isRequired,
+                  errMessage: null,
+                });
+                return;
+              }
+              let isDataValid = true;
+              let errMessage: null | string = null;
+              for (const value of validation.validations) {
+                if (!value.callbak(currValue)) {
+                  isDataValid = false;
+                  errMessage = value.message;
+                  break;
+                }
+              }
+              validation.setValidationState({
+                isValid: isDataValid,
+                errMessage: errMessage,
+              });
+            }}
+            {...props}
+          />
+          <div className={cl.TextField__errorWarning}>
+            <span className={cl.TextField__errorWarningText}>
+              {validation?.validationState.errMessage}
+            </span>
+            <ErrorIcon className={cl.TextField__errorWarningIcon} />
+          </div>
+        </div>
+      </div>
     </label>
   );
 };

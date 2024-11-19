@@ -21,6 +21,24 @@ type ValidationState = {
   [name in keyof Expense]: {isValid: boolean; errMessage: string | null};
 };
 
+export const defaulValidationState: ValidationState = {
+  name: {isValid: false, errMessage: null},
+  categoryName: {isValid: true, errMessage: null}, //временно захардкожено//
+  amount: {isValid: false, errMessage: null},
+  date: {isValid: true, errMessage: null}, //временно захардкожено//
+  descriprion: {isValid: true, errMessage: null},
+};
+
+export const defaulAddExpenseWindowState: AddExpenseWindowState = {
+  name: "",
+  categoryName: "food",
+  amount: "",
+  date: 0,
+  descriprion: "",
+  isDataValid: false,
+  isOpen: false,
+};
+
 // eslint-disable-next-line max-lines-per-function
 const AddExpenseWindow = ({
   className,
@@ -28,13 +46,27 @@ const AddExpenseWindow = ({
   addExpense,
   setAddExpenseWindowState: setState,
 }: AddExpenseWindowProps) => {
-  const [validationState, setValidationState] = useState<ValidationState>({
-    name: {isValid: false, errMessage: null},
-    categoryName: {isValid: true, errMessage: null}, //временно захардкожено//
-    amount: {isValid: false, errMessage: null},
-    date: {isValid: true, errMessage: null}, //временно захардкожено//
-    descriprion: {isValid: false, errMessage: null},
-  });
+  const [validationState, setValidationState] = useState<ValidationState>(
+    defaulValidationState,
+  );
+
+  const setStateByKey = (
+    statePropKey: keyof AddExpenseWindowState,
+    value: string | number | boolean,
+  ): void => {
+    setState({
+      ...state,
+      [statePropKey]: value,
+    });
+  };
+
+  const setValidationStateByKey = (
+    key: keyof ValidationState,
+    value: {isValid: boolean; errMessage: null | string},
+  ): void => {
+    setValidationState({...validationState, [key]: value});
+  };
+
   useEffect(() => {
     let isDataValid = true;
     for (const value of Object.values(validationState)) {
@@ -45,21 +77,11 @@ const AddExpenseWindow = ({
     }
     setStateByKey("isDataValid", isDataValid);
   }, [validationState]);
-  const setStateByKey = (
-    statePropKey: keyof AddExpenseWindowState,
-    value: string | number | boolean,
-  ): void => {
-    setState({
-      ...state,
-      [statePropKey]: value,
-    });
-  };
-  const setValidationStateByKey = (
-    key: keyof ValidationState,
-    value: {isValid: boolean; errMessage: null | string},
-  ): void => {
-    setValidationState({...validationState, [key]: value});
-  };
+
+  function closeAndClearWindow(): void {
+    setState(defaulAddExpenseWindowState);
+    setValidationState(defaulValidationState);
+  }
   return (
     <div className={`${classes.AddExpenseWindow} ${className ?? ""}`}>
       <h2 className={classes.AddExpenseWindow__heading}>
@@ -67,17 +89,7 @@ const AddExpenseWindow = ({
       </h2>
       <div
         className={classes.AddExpenseWindow__backButton}
-        onClick={() => {
-          setState({
-            name: "",
-            categoryName: "food",
-            amount: "0",
-            date: 0,
-            descriprion: "",
-            isDataValid: false,
-            isOpen: false,
-          });
-        }}>
+        onClick={closeAndClearWindow}>
         <ArrowIcon className={classes.AddExpenseWindow__backButtonIcon} />
       </div>
       <div className={classes.AddExpenseWindow__fields}>
@@ -92,6 +104,7 @@ const AddExpenseWindow = ({
           labelText="Name:"
           labelTextPosition="left"
           validation={{
+            isRequired: true,
             validationState: validationState.name,
             setValidationState: state => {
               setValidationStateByKey("name", state);
@@ -128,6 +141,7 @@ const AddExpenseWindow = ({
           labelText="Amount:"
           labelTextPosition="left"
           validation={{
+            isRequired: true,
             validationState: validationState.amount,
             setValidationState: state => {
               setValidationStateByKey("amount", state);
@@ -136,7 +150,11 @@ const AddExpenseWindow = ({
               {
                 message: "Invalid value",
                 callbak: value => {
-                  if (value.match(/^\d{1,}$/) || value.match(/^\d{1,}\.\d$/)) {
+                  const valueTrimed = value.trim();
+                  if (
+                    valueTrimed.match(/^\d{1,}$/) ||
+                    valueTrimed.match(/^\d{1,}\.\d$/)
+                  ) {
                     return true;
                   }
                   return false;
@@ -168,6 +186,7 @@ const AddExpenseWindow = ({
           labelText="Describtion:"
           labelTextPosition="top"
           validation={{
+            isRequired: false,
             validationState: validationState.descriprion,
             setValidationState: state => {
               setValidationStateByKey("descriprion", state);
@@ -175,27 +194,27 @@ const AddExpenseWindow = ({
             validations: [
               {
                 message: "Maximum length is exceed",
-                callbak: value => value.length <= 350,
+                callbak: value => value.length <= 300,
               },
             ],
           }}
         />
       </div>
-
+      <span
+        className={[
+          classes.AddExpenseWindow__warningText,
+          state.isDataValid
+            ? classes.AddExpenseWindow__warningText_transparent
+            : "",
+        ].join(" ")}>
+        Fill in all required* forms with no errors
+      </span>
       <MainButton
         className={classes.AddExpenseWindow__submitButton}
         text="Add"
         callback={() => {
           addExpense({...state, date: Date.now()});
-          setState({
-            name: "",
-            categoryName: "food",
-            amount: "0",
-            date: 0,
-            descriprion: "",
-            isDataValid: false,
-            isOpen: false,
-          });
+          closeAndClearWindow();
         }}
         isDisabled={!state.isDataValid}
       />

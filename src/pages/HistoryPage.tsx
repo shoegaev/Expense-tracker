@@ -6,6 +6,7 @@ import cl from "./HistoryPagesStyle.module.scss";
 import MainButton from "../components/UI/MainButton/MainButton";
 import AddExpenseWindow, {
   AddExpenseWindowState,
+  defaulAddExpenseWindowState,
 } from "../components/addExpenseWindow/AddExpenseWindow";
 
 type HistoryPageProps = {
@@ -14,15 +15,9 @@ type HistoryPageProps = {
 };
 
 const HistoryPage = (props: HistoryPageProps) => {
-  const [addWindowState, setAddWindowState] = useState<AddExpenseWindowState>({
-    name: "",
-    categoryName: "food",
-    amount: "0",
-    date: 0,
-    descriprion: "",
-    isDataValid: false,
-    isOpen: false,
-  });
+  const [addWindowState, setAddWindowState] = useState<AddExpenseWindowState>(
+    defaulAddExpenseWindowState,
+  );
 
   return (
     <div
