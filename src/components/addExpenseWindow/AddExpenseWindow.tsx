@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Expense} from "../../types/appDataType";
 import TextField from "../UI/TextField/TextField";
+import NumberField from "../UI/NumberField/NumberField";
 import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
 import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
@@ -14,7 +15,9 @@ export interface AddExpenseWindowProps {
   className?: string;
   addExpense: (params: Expense) => true | "Invalid Date" | "Invalid category";
   AddExpenseWindowState: AddExpenseWindowState;
-  setAddExpenseWindowState: (expense: AddExpenseWindowState) => void;
+  setAddExpenseWindowState: React.Dispatch<
+    React.SetStateAction<AddExpenseWindowState>
+  >;
 }
 
 type ValidationState = {
@@ -33,7 +36,7 @@ export const defaulAddExpenseWindowState: AddExpenseWindowState = {
   name: "",
   categoryName: "food",
   amount: "",
-  date: 0,
+  date: "",
   descriprion: "",
   isDataValid: false,
   isOpen: false,
@@ -50,14 +53,22 @@ const AddExpenseWindow = ({
     defaulValidationState,
   );
 
-  const setStateByKey = (
-    statePropKey: keyof AddExpenseWindowState,
-    value: string | number | boolean,
+  const setStateByKey = <T extends keyof AddExpenseWindowState>(
+    statePropKey: T,
+    value:
+      | AddExpenseWindowState[T]
+      | ((prevValue: AddExpenseWindowState[T]) => AddExpenseWindowState[T]),
   ): void => {
-    setState({
-      ...state,
-      [statePropKey]: value,
-    });
+    if (typeof value === "function") {
+      setState(s => {
+        return {...s, [statePropKey]: value(s[statePropKey])};
+      });
+    } else {
+      setState({
+        ...state,
+        [statePropKey]: value,
+      });
+    }
   };
 
   const setValidationStateByKey = (
@@ -129,8 +140,7 @@ const AddExpenseWindow = ({
           labelTextPosition="left"
           disabled={true}
         />
-        {/* добавить отдельный элемент для инпута цифр*/}
-        <TextField
+        <NumberField
           controlParams={[
             state.amount,
             newValue => {
@@ -148,16 +158,45 @@ const AddExpenseWindow = ({
             },
             validations: [
               {
-                message: "Invalid value",
+                message: "Invalid symbols",
+                callbak: value => !value.match(/[a-zA-Z]/),
+              },
+              {
+                message: "Maximum length is exceed",
+                callbak: value => value.length <= 12,
+              },
+              {
+                message: "Invalid decimal fraction",
                 callbak: value => {
                   const valueTrimed = value.trim();
+                  const arr = valueTrimed.split(".");
                   if (
-                    valueTrimed.match(/^\d{1,}$/) ||
-                    valueTrimed.match(/^\d{1,}\.\d$/)
+                    arr.length > 2 ||
+                    (arr.length === 2 && arr[0].length === 0)
                   ) {
+                    return false;
+                  }
+                  return true;
+                },
+              },
+              {
+                message: "Two decimal places max",
+                callbak: value => {
+                  const valueTrimed = value.trim();
+                  const arr = valueTrimed.split(".");
+                  if (arr.length === 1) {
+                    return true;
+                  } else {
+                    if (arr[1].length > 2) {
+                      return false;
+                    }
                     return true;
                   }
-                  return false;
+                },
+              },
+              {
+                callbak: value => {
+                  return !value.match(/^0\.{0,1}0{0,}$/);
                 },
               },
             ],
@@ -194,7 +233,7 @@ const AddExpenseWindow = ({
             validations: [
               {
                 message: "Maximum length is exceed",
-                callbak: value => value.length <= 300,
+                callbak: value => value.length <= 500,
               },
             ],
           }}
@@ -213,7 +252,7 @@ const AddExpenseWindow = ({
         className={classes.AddExpenseWindow__submitButton}
         text="Add"
         callback={() => {
-          addExpense({...state, date: Date.now()});
+          addExpense({...state, date: Date.now().toString()});
           closeAndClearWindow();
         }}
         isDisabled={!state.isDataValid}

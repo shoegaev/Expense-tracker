@@ -36,7 +36,7 @@ export class AppDataHandler {
     }
     const expense: Expense = {
       ...params,
-      date: date.valueOf(),
+      date: String(date.valueOf()),
     };
     this.integrateExpense(expense);
     return true;

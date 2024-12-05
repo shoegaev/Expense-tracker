@@ -4,8 +4,10 @@
   grid-template-columns: 96px calc(100% - 96px);
   align-items: center;
   text-align: left;
+  user-select: none;
   .TextField__labelText {
     word-wrap: break-word;
+    user-select: auto;
   }
   .TextField__content {
     width: 100%;
@@ -26,6 +28,7 @@
         right: 4px;
         top: 4px;
         transition: opacity 0.2s ease;
+        user-select: none;
       }
       .TextField__textArea {
         font-family: inherit;
@@ -162,6 +165,71 @@
           width: 100%;
         }
       }
+    }
+  }
+}
+
+// padding Modifiers
+.TextField.TextField_paddingRight10px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 10px;
+    }
+  }
+}
+.TextField.TextField_paddingRight20px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 20px;
+    }
+  }
+}
+.TextField.TextField_paddingRight30px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 30px;
+    }
+  }
+}
+.TextField.TextField_paddingRight40px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 40px;
+    }
+  }
+}
+.TextField.TextField_paddingRight50px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 50px;
+    }
+  }
+}
+.TextField.TextField_paddingRight60px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 60px;
+    }
+  }
+}
+.TextField.TextField_paddingRight70px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 70px;
+    }
+  }
+}
+.TextField.TextField_paddingRight80px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 80px;
+    }
+  }
+}
+.TextField.TextField_paddingRight90px {
+  .TextField__content {
+    .TextField__field {
+      padding-right: 90px;
     }
   }
 }

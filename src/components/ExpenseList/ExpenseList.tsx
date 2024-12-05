@@ -41,7 +41,7 @@ const ExpenseList = ({
   if (period) {
     expenseIds.filter(id => {
       const date = appState.expenses[id].date;
-      return period[0] < date && date < period[1];
+      return period[0] < Number(date) && Number(date) < period[1];
     });
   }
   const ExpenseLines = expenseIds.map(id => {

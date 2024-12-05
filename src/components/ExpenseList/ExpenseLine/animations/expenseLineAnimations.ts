@@ -25,3 +25,4 @@ export function minimize(
   }, 200);
   return timerId;
 }
+

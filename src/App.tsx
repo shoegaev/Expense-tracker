@@ -16,7 +16,6 @@ const localStorageItem = localStorage.getItem(LOCAL_STORAGE_KEY);
 const dataHandler = localStorageItem
   ? new AppDataHandler(JSON.parse(localStorageItem))
   : new AppDataHandler();
-
 function App() {
   const [appState, setAppState] = useState<AppData>(dataHandler.getAppData());
   const beforeUnloadHandler = () => {
