@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
-import TextField, {TextFieldProps} from "../TextField/TextField";
+import FormTextField, {FormTextFieldProps} from "../FormTextField/FormTextField";
 import classes from "./NumberFieldStyle.module.scss";
 
-interface NumberFieldProps extends TextFieldProps {
+interface NumberFieldProps extends FormTextFieldProps {
   id?: string;
 }
 
@@ -73,7 +73,7 @@ const NumberField = (props: NumberFieldProps) => {
   };
   return (
     <div className={classes.NumberField}>
-      <TextField
+      <FormTextField
         {...props}
         inputMode="decimal"
         symbolsRestrictions={/[0-9.]/}

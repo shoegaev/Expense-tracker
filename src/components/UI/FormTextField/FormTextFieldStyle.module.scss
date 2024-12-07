@@ -1,17 +1,17 @@
 @import "../../../variables.scss";
-.TextField {
+.FormTextField {
   display: grid;
   grid-template-columns: 96px calc(100% - 96px);
   align-items: center;
   text-align: left;
   user-select: none;
-  .TextField__labelText {
+  .FormTextField__labelText {
     word-wrap: break-word;
     user-select: auto;
   }
-  .TextField__content {
+  .FormTextField__content {
     width: 100%;
-    .TextField__field {
+    .FormTextField__field {
       display: flex;
       flex-direction: column;
 
@@ -21,7 +21,7 @@
       padding: 0 16px 0 6px;
       background-color: $color-interfaceBright;
       transition: outline 0.2s ease;
-      .TextField__asterisk {
+      .FormTextField__asterisk {
         width: 10px;
         height: 10px;
         position: absolute;
@@ -30,7 +30,7 @@
         transition: opacity 0.2s ease;
         user-select: none;
       }
-      .TextField__textArea {
+      .FormTextField__textArea {
         font-family: inherit;
         height: 36px;
         width: 100%;
@@ -44,7 +44,7 @@
         position: relative;
       }
 
-      .TextField__errorWarning {
+      .FormTextField__errorWarning {
         align-self: flex-end;
         display: none;
         align-items: center;
@@ -61,19 +61,19 @@
         background-color: $color-interfaceDark;
         text-align: center;
         z-index: 3;
-        .TextField__errorWarningText {
+        .FormTextField__errorWarningText {
           font-size: $fontSizeUnderline;
           color: $color-headerBackground;
           flex-grow: 1;
         }
-        .TextField__errorWarningIcon {
+        .FormTextField__errorWarningIcon {
           width: 18px;
           height: 18px;
           flex-grow: 0;
         }
       }
     }
-    .TextField__field::before {
+    .FormTextField__field::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -81,35 +81,35 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .TextField__field:focus-within.TextField__field::before {
+    .FormTextField__field:focus-within.FormTextField__field::before {
       opacity: 1;
     }
   }
 
-  .TextField__textArea:focus {
+  .FormTextField__textArea:focus {
     outline: none;
   }
-  .TextField__textArea::placeholder {
+  .FormTextField__textArea::placeholder {
     visibility: hidden;
   }
 }
 
-.TextField.TextField_labelTextTop {
+.FormTextField.FormTextField_labelTextTop {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
   width: 100%;
-  .TextField__labelText {
+  .FormTextField__labelText {
     align-self: flex-start;
   }
-  .TextField__content {
-    .TextField__field {
+  .FormTextField__content {
+    .FormTextField__field {
       height: 160px;
       margin-left: 96px;
       width: calc(100% - 96px);
       padding: 8px 6px 4px 6px;
-      .TextField__textArea {
+      .FormTextField__textArea {
         padding: 0;
         width: 100%;
         height: 100%;
@@ -118,50 +118,50 @@
     }
   }
 }
-.TextField.TextField_labelTextTop ::-webkit-scrollbar {
+.FormTextField.FormTextField_labelTextTop ::-webkit-scrollbar {
   @include scrollbarSmall;
 }
-.TextField.TextField_labelTextTop ::-webkit-scrollbar-thumb {
+.FormTextField.FormTextField_labelTextTop ::-webkit-scrollbar-thumb {
   @include scrollbarThumbSmall;
 }
-.TextField.TextField_error {
-  .TextField__content {
-    .TextField__errorWarning {
+.FormTextField.FormTextField_error {
+  .FormTextField__content {
+    .FormTextField__errorWarning {
       display: flex;
     }
   }
 }
 
 @media (max-width: 800px) {
-  .TextField {
+  .FormTextField {
     display: flex;
-    .TextField__labelText {
+    .FormTextField__labelText {
       display: none;
     }
-    .TextField__textArea::placeholder {
+    .FormTextField__textArea::placeholder {
       visibility: visible;
     }
   }
 
-  .TextField.TextField_labelTextTop {
+  .FormTextField.FormTextField_labelTextTop {
     align-items: center;
-    .TextField__content {
+    .FormTextField__content {
       display: flex;
       justify-content: center;
-      .TextField__field {
+      .FormTextField__field {
         margin-left: 0;
       }
     }
   }
 }
 @media (max-width: 630px) {
-  .TextField,
-  .TextField.TextField_labelTextTop {
+  .FormTextField,
+  .FormTextField.FormTextField_labelTextTop {
     width: 100%;
-    .TextField__content {
-      .TextField__field {
+    .FormTextField__content {
+      .FormTextField__field {
         width: 100%;
-        .TextField__textArea {
+        .FormTextField__textArea {
           width: 100%;
         }
       }
@@ -170,65 +170,65 @@
 }
 
 // padding Modifiers
-.TextField.TextField_paddingRight10px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight10px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 10px;
     }
   }
 }
-.TextField.TextField_paddingRight20px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight20px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 20px;
     }
   }
 }
-.TextField.TextField_paddingRight30px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight30px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 30px;
     }
   }
 }
-.TextField.TextField_paddingRight40px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight40px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 40px;
     }
   }
 }
-.TextField.TextField_paddingRight50px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight50px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 50px;
     }
   }
 }
-.TextField.TextField_paddingRight60px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight60px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 60px;
     }
   }
 }
-.TextField.TextField_paddingRight70px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight70px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 70px;
     }
   }
 }
-.TextField.TextField_paddingRight80px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight80px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 80px;
     }
   }
 }
-.TextField.TextField_paddingRight90px {
-  .TextField__content {
-    .TextField__field {
+.FormTextField.FormTextField_paddingRight90px {
+  .FormTextField__content {
+    .FormTextField__field {
       padding-right: 90px;
     }
   }

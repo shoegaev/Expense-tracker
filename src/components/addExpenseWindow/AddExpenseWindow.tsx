@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Expense} from "../../types/appDataType";
-import TextField from "../UI/TextField/TextField";
+import FormTextField from "../UI/FormTextField/FormTextField";
 import NumberField from "../UI/NumberField/NumberField";
 import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
@@ -104,7 +104,7 @@ const AddExpenseWindow = ({
         <ArrowIcon className={classes.AddExpenseWindow__backButtonIcon} />
       </div>
       <div className={classes.AddExpenseWindow__fields}>
-        <TextField
+        <FormTextField
           controlParams={[
             state.name,
             newValue => {
@@ -128,7 +128,7 @@ const AddExpenseWindow = ({
             ],
           }}
         />
-        <TextField
+        <FormTextField
           controlParams={[
             state.categoryName,
             newValue => {
@@ -202,7 +202,7 @@ const AddExpenseWindow = ({
             ],
           }}
         />
-        <TextField
+        <FormTextField
           controlParams={[
             state.categoryName,
             newValue => {
@@ -214,7 +214,7 @@ const AddExpenseWindow = ({
           labelTextPosition="left"
           disabled={true}
         />
-        <TextField
+        <FormTextField
           controlParams={[
             state.descriprion,
             newValue => {

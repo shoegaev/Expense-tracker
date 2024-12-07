@@ -1,10 +1,10 @@
 /* eslint-disable max-lines-per-function */
 import React, {FormEventHandler, useEffect} from "react";
-import cl from "./TextFieldStyle.module.scss";
+import cl from "./FormTextFieldStyle.module.scss";
 import {ReactComponent as Asterisk} from "../../../assets/icons/Asterisk.svg";
 import {ReactComponent as ErrorIcon} from "../../../assets/icons/ErrorIcon.svg";
 
-export interface TextFieldProps {
+export interface FormTextFieldProps {
   controlParams: [
     value: string,
     setValue: (newValue: string | ((prevValue: string) => string)) => void,
@@ -30,7 +30,7 @@ export interface TextFieldProps {
   textAreaRef?: React.MutableRefObject<HTMLTextAreaElement | null>;
 }
 
-const TextField = ({
+const FormTextField = ({
   className,
   controlParams,
   onInput,
@@ -41,19 +41,19 @@ const TextField = ({
   paddingRight,
   textAreaRef,
   ...props
-}: TextFieldProps) => {
+}: FormTextFieldProps) => {
   const [value, setValue] = controlParams;
-  const classes: string[] = [cl.TextField];
+  const classes: string[] = [cl.FormTextField];
   if (className) classes.push(className);
-  if (labelTextPosition === "top") classes.push(cl.TextField_labelTextTop);
-  if (validation?.validationState.errMessage) classes.push(cl.TextField_error);
+  if (labelTextPosition === "top") classes.push(cl.FormTextField_labelTextTop);
+  if (validation?.validationState.errMessage) classes.push(cl.FormTextField_error);
   if (paddingRight) {
     const remainder = paddingRight % 10;
     const padding =
       remainder >= 5
         ? paddingRight + (10 - remainder)
         : paddingRight - remainder;
-    classes.push(cl[`TextField_paddingRight${padding}px`] ?? "");
+    classes.push(cl[`FormTextField_paddingRight${padding}px`] ?? "");
   }
   useEffect(() => {
     if (!validation) return;
@@ -80,15 +80,15 @@ const TextField = ({
   }, [value]);
   return (
     <label className={classes.join(" ")}>
-      <span className={cl.TextField__labelText}>{labelText}</span>
-      <div className={cl.TextField__content}>
-        <div className={cl.TextField__field}>
+      <span className={cl.FormTextField__labelText}>{labelText}</span>
+      <div className={cl.FormTextField__content}>
+        <div className={cl.FormTextField__field}>
           {validation?.isRequired && (
-            <Asterisk className={cl.TextField__asterisk} />
+            <Asterisk className={cl.FormTextField__asterisk} />
           )}
           <textarea
             ref={textAreaRef}
-            className={cl.TextField__textArea}
+            className={cl.FormTextField__textArea}
             value={value}
             wrap={labelTextPosition === "left" ? "off" : "hard"}
             onInput={e => {
@@ -109,9 +109,9 @@ const TextField = ({
             }}
             {...props}
           />
-          <div className={cl.TextField__errorWarning}>
-            <ErrorIcon className={cl.TextField__errorWarningIcon} />
-            <span className={cl.TextField__errorWarningText}>
+          <div className={cl.FormTextField__errorWarning}>
+            <ErrorIcon className={cl.FormTextField__errorWarningIcon} />
+            <span className={cl.FormTextField__errorWarningText}>
               {validation?.validationState.errMessage}
             </span>
           </div>
@@ -121,4 +121,4 @@ const TextField = ({
   );
 };
 
-export default TextField;
+export default FormTextField;
