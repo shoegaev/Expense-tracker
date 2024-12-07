@@ -1,0 +1,89 @@
+@import "../../../variables.scss";
+.TextField {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: $color-interfaceBright;
+  transition: outline 0.2s ease;
+
+  .TextField__textArea {
+    height: auto;
+    font-family: inherit;
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: inherit;
+    resize: none;
+    background-color: transparent;
+    z-index: 2;
+    position: relative;
+  }
+
+  .TextField__textArea:focus {
+    outline: none;
+  }
+}
+.TextField::before {
+  content: "";
+  user-select: none;
+  position: absolute;
+  inset: 0;
+  border: 2px solid $color-interfaceDark;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.TextField:focus-within.TextField::before {
+  opacity: 1;
+}
+
+.TextField.textArea_overflowXAuto {
+  .TextField__textArea {
+    overflow-x: auto;
+  }
+}
+.TextField.textArea_overflowXVisible {
+  .TextField__textArea {
+    overflow-x: visible;
+  }
+}
+.TextField.textArea_overflowXScroll {
+  .TextField__textArea {
+    overflow-x: scroll;
+  }
+}
+.TextField.textArea_overflowXHidden {
+  .TextField__textArea {
+    overflow-x: Hidden;
+  }
+}
+.TextField.textArea_overflowYAuto {
+  .TextField__textArea {
+    overflow-y: auto;
+  }
+}
+.TextField.textArea_overflowYVisible {
+  .TextField__textArea {
+    overflow-y: visible;
+  }
+}
+.TextField.textArea_overflowYScroll {
+  .TextField__textArea {
+    overflow-y: scroll;
+  }
+}
+.TextField.textArea_overflowYHidden {
+  .TextField__textArea {
+    overflow-y: hidden;
+  }
+}
+.TextField {
+  ::-webkit-scrollbar {
+    @include scrollbarSmall;
+  }
+}
+.TextField {
+  ::-webkit-scrollbar-thumb {
+    @include scrollbarThumbSmall;
+  }
+}
