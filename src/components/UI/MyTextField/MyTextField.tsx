@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, {FormEventHandler} from "react";
 import cl from "./MyTextField.module.scss";
 
@@ -15,6 +16,8 @@ interface MyTextFieldProps {
     x: scrollProperty;
     y: scrollProperty;
   };
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 const MyTextField = ({
@@ -24,10 +27,16 @@ const MyTextField = ({
   onInput,
   wrap = "off",
   overflow = {x: "Hidden", y: "Hidden"},
+  placeholder,
+  disabled,
   ...props
 }: MyTextFieldProps) => {
   const [value, setValue] = controllParams;
-  const classNameArr = [cl.TextField, ...(cssClasses ?? [])];
+  const classNameArr = [
+    cl.TextField,
+    disabled ? cl.TextField_disabled : "",
+    ...(cssClasses ?? []),
+  ];
   if (overflow) {
     classNameArr.push(
       cl[`textArea_overflowY${overflow.y}`],
@@ -38,6 +47,8 @@ const MyTextField = ({
   return (
     <div className={classNameArr.join(" ")}>
       <textarea
+        disabled={disabled}
+        placeholder={placeholder}
         wrap={wrap}
         className={cl.TextField__textArea}
         value={value}

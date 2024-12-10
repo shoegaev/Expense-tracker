@@ -5,7 +5,9 @@
   justify-content: center;
   position: relative;
   background-color: $color-interfaceBright;
-  transition: outline 0.2s ease;
+  transition:
+    outline 0.2s ease,
+    opacity 0.2s ease;
 
   .TextField__textArea {
     height: auto;
@@ -23,6 +25,9 @@
   .TextField__textArea:focus {
     outline: none;
   }
+}
+.TextField.TextField_disabled {
+  opacity: 0.4;
 }
 .TextField::before {
   content: "";
