@@ -1,0 +1,13 @@
+.LabeledTextField {
+  display: flex;
+  flex-direction: column;
+  .LabeledTextField__label {
+    flex: 0 0;
+    font-size: 0.7em;
+    width: fit-content;
+  }
+  .LabeledTextField__textField {
+    width: 100%;
+    flex: 1 1;
+  }
+}

@@ -1,0 +1,62 @@
+@import "../../../variables.scss";
+.TextField {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-size: inherit;
+  background-color: $color-interfaceBright;
+  transition:
+    outline 0.2s ease,
+    opacity 0.2s ease;
+  .TextField__textArea {
+    font-size: inherit;
+    font-family: inherit;
+    height: calc(1em + 4px);
+    width: calc(100% - 10px);
+    border: none;
+    resize: none;
+    background-color: transparent;
+    z-index: 2;
+    overflow: hidden;
+    flex: 1 1;
+  }
+  *:not(.TextField__textArea) {
+    flex: 0 0 auto;
+  }
+  .TextField__textArea:focus {
+    outline: none;
+  }
+}
+.TextField.TextField_miltiLine {
+  .TextField__textArea {
+    overflow-y: auto;
+    height: calc(100% - 10px);
+  }
+}
+.TextField.TextField_disabled {
+  opacity: 0.4;
+}
+.TextField::before {
+  content: "";
+  user-select: none;
+  position: absolute;
+  inset: 0;
+  border: 2px solid $color-interfaceDark;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.TextField:focus-within.TextField::before {
+  opacity: 1;
+}
+
+.TextField {
+  ::-webkit-scrollbar {
+    @include scrollbarSmall;
+  }
+}
+.TextField {
+  ::-webkit-scrollbar-thumb {
+    @include scrollbarThumbSmall;
+  }
+}
