@@ -1,8 +1,8 @@
 import React, {useId} from "react";
-import MyTextField, {MyTextFieldProps} from "../MyTextField/MyTextField";
+import TextField, {TextFieldProps} from "../TextField/TextField";
 import cl from "./LabeledTextField.module.scss";
 
-export interface LabeledTextFieldProps extends MyTextFieldProps {
+export interface LabeledTextFieldProps extends TextFieldProps {
   labelText: string;
   cssClasses?: string[];
   textFieldCssClasses?: string[];
@@ -19,7 +19,7 @@ const LabeledTextField = ({
   return (
     <div className={classnameArr.join(" ")}>
       <label className={cl.LabeledTextField__label} htmlFor={id}>{labelText}</label>
-      <MyTextField
+      <TextField
         cssClasses={[
           cl.LabeledTextField__textField,
           ...(textFieldCssClasses ?? []),

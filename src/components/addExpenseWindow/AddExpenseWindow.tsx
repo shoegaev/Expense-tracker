@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Expense} from "../../types/appDataType";
-import TextField from "../UI/TextField/TextField";
-import NumberField from "../UI/NumberField/NumberField";
+import FormTextField from "../UI/FormTextField/FormTextField";
 import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
+import StepperButtons from "../UI/StepperButtons/StepperButtons";
 import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
 
 export interface AddExpenseWindowState extends Expense {
@@ -104,16 +104,16 @@ const AddExpenseWindow = ({
         <ArrowIcon className={classes.AddExpenseWindow__backButtonIcon} />
       </div>
       <div className={classes.AddExpenseWindow__fields}>
-        <TextField
+        <FormTextField
+          cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.name,
             newValue => {
               setStateByKey("name", newValue);
             },
           ]}
-          placeholder="Name"
+          placeholder="Expense name"
           labelText="Name:"
-          labelTextPosition="left"
           validation={{
             isRequired: true,
             validationState: validationState.name,
@@ -128,7 +128,8 @@ const AddExpenseWindow = ({
             ],
           }}
         />
-        <TextField
+        <FormTextField
+          cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.categoryName,
             newValue => {
@@ -137,10 +138,10 @@ const AddExpenseWindow = ({
           ]}
           placeholder="Category"
           labelText="Category:"
-          labelTextPosition="left"
           disabled={true}
         />
-        <NumberField
+        <FormTextField
+          cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.amount,
             newValue => {
@@ -149,7 +150,20 @@ const AddExpenseWindow = ({
           ]}
           placeholder="Amount"
           labelText="Amount:"
-          labelTextPosition="left"
+          symbolsRestrictions={/[0-9.]/}
+          innerElements={{
+            right: [
+              <StepperButtons
+                key="button"
+                controlParams={[
+                  state.amount,
+                  newValue => {
+                    setStateByKey("amount", newValue);
+                  },
+                ]}
+              />,
+            ],
+          }}
           validation={{
             isRequired: true,
             validationState: validationState.amount,
@@ -202,7 +216,8 @@ const AddExpenseWindow = ({
             ],
           }}
         />
-        <TextField
+        <FormTextField
+          cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.categoryName,
             newValue => {
@@ -211,10 +226,10 @@ const AddExpenseWindow = ({
           ]}
           placeholder="Date"
           labelText="Date:"
-          labelTextPosition="left"
           disabled={true}
         />
-        <TextField
+        <FormTextField
+          cssClasses={[classes.AddExpenseWindow__field_multiLine]}
           controlParams={[
             state.descriprion,
             newValue => {
@@ -223,7 +238,7 @@ const AddExpenseWindow = ({
           ]}
           placeholder="Describtion"
           labelText="Describtion:"
-          labelTextPosition="top"
+          lineType="multi-line"
           validation={{
             isRequired: false,
             validationState: validationState.descriprion,
@@ -233,7 +248,7 @@ const AddExpenseWindow = ({
             validations: [
               {
                 message: "Maximum length is exceed",
-                callbak: value => value.length <= 500,
+                callbak: value => value.length <= 1000,
               },
             ],
           }}
