@@ -3,7 +3,8 @@ import React, {FormEventHandler} from "react";
 import {ControlParams} from "../../../types/ControlParamsType";
 import cl from "./TextField.module.scss";
 
-export interface MyTextFieldProps {
+
+export interface TextFieldProps {
   controlParams: ControlParams<string>;
   cssClasses?: string[];
   inputMode?: "text" | "decimal" | "numeric";
@@ -19,7 +20,7 @@ export interface MyTextFieldProps {
   id?: string;
 }
 
-const MyTextField = ({
+const TextField = ({
   cssClasses,
   controlParams,
   symbolsRestrictions,
@@ -29,7 +30,7 @@ const MyTextField = ({
   disabled,
   innerElements,
   ...props
-}: MyTextFieldProps) => {
+}: TextFieldProps) => {
   const [value, setValue] = controlParams;
   const classNameArr = [
     cl.TextField,
@@ -72,4 +73,4 @@ const MyTextField = ({
   );
 };
 
-export default MyTextField;
+export default TextField;

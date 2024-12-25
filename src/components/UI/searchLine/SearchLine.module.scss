@@ -1,0 +1,37 @@
+@import "../../../variables.scss";
+.SearchLine {
+  .SearchLine__magnifierIcon {
+    height: 100%;
+  }
+  .SearchLine__button {
+    z-index: 3;
+    cursor: pointer;
+    transition: scale 0.2s ease;
+    background-color: $color-interfaceDark;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 50%;
+      height: 50%;
+    }
+  }
+  @media (hover: hover) {
+    .SearchLine__button:hover {
+      scale: 1.1;
+    }
+  }
+}
+.SearchLine_disabled {
+  .SearchLine__button {
+    cursor: auto;
+  }
+  @media (hover: hover) {
+    .SearchLine__button:hover {
+      scale: 1;
+    }
+  }
+}

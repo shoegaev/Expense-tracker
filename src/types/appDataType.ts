@@ -5,11 +5,14 @@ export interface Expense {
   date: string;
   descriprion: string;
 }
-
-export interface Category {
-  amount: number;
-  expenses: string[]; // sorted by date //
+export interface CategoryInitProps {
   color: string;
+  describtion?: string;
+  name: string;
+}
+export interface Category extends CategoryInitProps {
+  amount: string;
+  expenses: string[]; // sorted by date //
 }
 
 export interface AppData {
