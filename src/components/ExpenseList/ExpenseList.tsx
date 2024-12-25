@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import classes from "./ExpenseListStyle.module.scss";
 import {AppData, Expense} from "../../types/appDataType";
 import ExpenseLine from "./ExpenseLine/EpxenseLine";
@@ -19,6 +19,9 @@ const ExpenseList = ({
   options = {sorting: ExpenseListSorting.dateDescending},
 }: ExpenseListProps) => {
   const {searchLine, period, category, sorting} = options;
+  //
+  const [searchLineValue, setSearchLineValue] = useState("");
+  //
   let expenseIds: string[];
   if (sorting === ExpenseListSorting.dateAscending) {
     expenseIds = [...appState.expensesSorted.date].reverse();
@@ -45,18 +48,19 @@ const ExpenseList = ({
     });
   }
   const ExpenseLines = expenseIds.map(id => {
-    return (
-      <ExpenseLine
-        key={id}
-        appState={appState}
-        params={appState.expenses[id]}></ExpenseLine>
-    );
+    return <ExpenseLine key={id} params={appState.expenses[id]}></ExpenseLine>;
   });
 
   return (
     <div className={classes.ExpenseList}>
-      <ExpenseListHeader />
-      <div className={classes.ExpenseList__list}>{ExpenseLines}</div>
+      <ExpenseListHeader
+        searchLineParams={[searchLineValue, setSearchLineValue]}
+      />
+      <div className={classes.ExpenseList__list}>
+        <hr className={classes.ExpenseList__listBorder} />
+        <div className={classes.ExpenseList__listContent}>{ExpenseLines}</div>
+        <hr className={classes.ExpenseList__listBorder} />
+      </div>
     </div>
   );
 };

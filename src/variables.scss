@@ -24,7 +24,6 @@ $innerHorizontalPadding_1000px: 20px;
 $innerHorizontalPadding_850px: 10px;
 $innerHorizontalPadding_500px: 4px;
 
-
 // utils
 @mixin centeredContent {
   display: flex;
@@ -32,20 +31,24 @@ $innerHorizontalPadding_500px: 4px;
   align-items: center;
 }
 
-
-// scrollbar 
+// scrollbar
 @mixin scrollbar {
-  width: 8px;
-  background-color: $color-interfaceGrey;
-  border-radius: 4px;
+  width: 6px;
 }
-
+@mixin scrollbarTrack {
+  width: 6px;
+  background-color: $color-interfaceGrey;
+  border-radius: 3px;
+}
 @mixin scrollbarThumb {
   background-color: $color-interfaceDark;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 @mixin scrollbarSmall {
+  width: 4px;
+}
+@mixin scrollbarTrackSmall {
   width: 4px;
   background-color: transparent;
   border-radius: 1px;

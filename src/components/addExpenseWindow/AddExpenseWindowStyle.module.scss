@@ -71,6 +71,9 @@
   .AddExpenseWindow__fields::-webkit-scrollbar {
     @include scrollbar;
   }
+  .AddExpenseWindow__fields::-webkit-scrollbar-track {
+    @include scrollbarTrack;
+  }
   .AddExpenseWindow__fields::-webkit-scrollbar-thumb {
     @include scrollbarThumb;
   }

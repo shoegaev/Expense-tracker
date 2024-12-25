@@ -7,38 +7,43 @@ $headerHeigth: 40px;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding-top: 16px;
+  padding: 16px 5px 0 5px;
   flex-shrink: 1;
-
   .ExpenseList__list {
     width: 100%;
-    position: relative;
-    padding: 10px 0;
-    overflow-y: scroll;
-    flex-shrink: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    flex-shrink: 1;
+    height: inherit;
+
+    .ExpenseList__listBorder {
+      width: 100%;
+      height: 2px;
+      border: none;
+      border-radius: 1px;
+      flex-shrink: 0;
+      background-color: $color-interfaceDark;
+    }
+    .ExpenseList__listContent {
+      flex-shrink: 1;
+      position: relative;
+      overflow-y: auto;
+      padding: 10px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
   }
-  .ExpenseList__list::before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    left: 0;
-    top: 0;
-    background-color: $color-interfaceDark;
+  .ExpenseList__listContent::-webkit-scrollbar {
+    @include scrollbar;
   }
-  .ExpenseList__list::after {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: $color-interfaceDark;
+  .ExpenseList__listContent::-webkit-scrollbar-thumb {
+    @include scrollbarThumb;
+  }
+  .ExpenseList__listContent::-webkit-scrollbar-track {
+    margin-top: 10px;
+    @include scrollbarTrack;
+    margin-bottom: 10px;
   }
 }

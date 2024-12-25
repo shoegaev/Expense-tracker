@@ -56,8 +56,10 @@
   ::-webkit-scrollbar {
     @include scrollbarSmall;
   }
-}
-.TextField {
+  ::-webkit-scrollbar-track {
+    @include scrollbarTrackSmall;
+  }
+
   ::-webkit-scrollbar-thumb {
     @include scrollbarThumbSmall;
   }
