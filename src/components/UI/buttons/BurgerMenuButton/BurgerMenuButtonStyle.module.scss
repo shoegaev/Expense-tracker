@@ -1,0 +1,56 @@
+@import "../../../../variables.scss";
+.BurgerMenuButton {
+  display: none;
+  background-color: $color-interfaceDark;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: scale 0.2s ease;
+  .BurgerMenuButton__stick {
+    position: absolute;
+    background-color: $color-headerBackground;
+    top: 50%;
+    left: 50%;
+    height: 2px;
+    width: 70%;
+    border-radius: 1px;
+    transition:
+      top 0.2s ease,
+      transform 0.2s ease,
+      opacity 0.2s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  .BurgerMenuButton__stick:nth-child(1) {
+    top: 30%;
+  }
+  .BurgerMenuButton__stick:nth-child(2) {
+    top: 50%;
+  }
+  .BurgerMenuButton__stick:nth-child(3) {
+    top: 70%;
+  }
+}
+.BurgerMenuButton.BurgerMenuButton_active {
+  .BurgerMenuButton__stick:nth-child(1) {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+  .BurgerMenuButton__stick:nth-child(2) {
+    opacity: 0;
+  }
+  .BurgerMenuButton__stick:nth-child(3) {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+@media (hover: hover) {
+  .BurgerMenuButton:hover {
+    scale: 1.1;
+  }
+}
+@media (max-width: 800px) {
+  .BurgerMenuButton {
+    display: block;
+  }
+}

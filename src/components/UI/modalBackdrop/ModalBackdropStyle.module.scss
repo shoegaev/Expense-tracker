@@ -1,0 +1,11 @@
+@import "../../../variables.scss";
+.ModalBackdrop {
+  background-color: rgba($color-interfaceGrey, 0.6);
+  transition: opacity 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+.ModalBackdrop_visible {
+  visibility: visible;
+  opacity: 1;
+}

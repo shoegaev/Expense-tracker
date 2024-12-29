@@ -1,5 +1,14 @@
 @import "../variables.scss";
-.content {
+.ModalBackdrop {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+}
+
+.Content {
   width: 100%;
   max-height: 700px;
   min-height: 300px;
@@ -7,18 +16,39 @@
   background-color: $color-mainBackground;
   padding: 20px $innerHorizontalPadding;
 }
+.BurgerMenuButton {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 26px;
+  right: 12px;
+  z-index: 7;
+}
 @media (max-width: 1000px) {
-  .content {
+  .Content {
     padding: 20px $innerHorizontalPadding_1000px;
   }
 }
 @media (max-width: 850px) {
-  .content {
+  .Content {
     padding: 10px $innerHorizontalPadding_850px;
   }
 }
-@media (max-width: 850px) {
-  .content {
+@media (max-width: 800px) {
+  .ModalBackdrop_visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .Content {
+    height: calc(100vh);
+  }
+}
+@media (max-width: 500px) {
+  .Content {
     padding: 5px $innerHorizontalPadding_500px;
+  }
+  .BurgerMenuButton {
+    top: 21px;
+    right: 9px;
   }
 }

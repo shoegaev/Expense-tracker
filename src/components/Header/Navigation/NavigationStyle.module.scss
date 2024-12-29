@@ -1,5 +1,18 @@
 .Navigation {
   display: flex;
   align-items: center;
+  .Navigation_link {
+    height: 40px;
+    min-width: 112px;
+  }
 }
-
+@media (max-width: 800px) {
+  .Navigation {
+    flex-direction: column;
+    width: 220px;
+    .Navigation_link {
+      height: 50px;
+      width: 100%;
+    }
+  }
+}

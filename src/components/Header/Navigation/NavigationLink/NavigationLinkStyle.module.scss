@@ -1,8 +1,7 @@
 @import "../../../../variables.scss";
 .NavigationLink {
   @include centeredContent;
-  min-width: 110px;
-  height: 40px;
+
   color: $color-textBlack;
   padding: 0px 5px;
 
@@ -35,5 +34,13 @@
     .NavigationLink__content {
       scale: 0.9;
     }
+  }
+}
+@media (max-width: 800px) {
+  .NavigationLink {
+    @include centeredContent;
+
+    color: $color-textBlack;
+    padding: 5px 0px;
   }
 }

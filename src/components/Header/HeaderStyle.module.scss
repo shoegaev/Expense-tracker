@@ -18,8 +18,27 @@
     padding: 8px $innerHorizontalPadding_850px;
   }
 }
+@media (max-width: 800px) {
+  .Header {
+    position: absolute;
+    height: 100vh;
+    width: 400px;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    transform: translateX(100%);
+    transition: transform 0.2s ease;
+    flex-direction: column;
+    padding-top: 65px;
+    overflow: auto;
+  }
+  .Header_open {
+    transform: translateX(0);
+  }
+}
 @media (max-width: 500px) {
   .Header {
-    padding: 6px $innerHorizontalPadding_500px;
+    width: 100vw;
+    padding: 65px $innerHorizontalPadding_500px;
   }
 }

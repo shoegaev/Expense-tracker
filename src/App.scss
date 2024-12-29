@@ -18,6 +18,7 @@ a {
 }
 body {
   background-color: $color-body;
+  overflow-x: hidden;
 }
 .App {
   margin-left: auto;
