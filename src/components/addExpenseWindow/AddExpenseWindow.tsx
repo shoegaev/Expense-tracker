@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Expense} from "../../types/appDataType";
 import FormTextField from "../UI/FormTextField/FormTextField";
+import AmountField from "./fields/AmountField/AmountField";
+import NameField from "./fields/NameField/NameField";
 import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
-import StepperButtons from "../UI/StepperButtons/StepperButtons";
 import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
+import DescribtionField from "./fields/DescribtionField/DescribtionField";
 
 export interface AddExpenseWindowState extends Expense {
   isDataValid: boolean;
@@ -104,7 +106,7 @@ const AddExpenseWindow = ({
         <ArrowIcon className={classes.AddExpenseWindow__backButtonIcon} />
       </div>
       <div className={classes.AddExpenseWindow__fields}>
-        <FormTextField
+        <NameField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.name,
@@ -112,20 +114,11 @@ const AddExpenseWindow = ({
               setStateByKey("name", newValue);
             },
           ]}
-          placeholder="Expense name"
-          labelText="Name:"
           validation={{
-            isRequired: true,
             validationState: validationState.name,
             setValidationState: state => {
               setValidationStateByKey("name", state);
             },
-            validations: [
-              {
-                message: "Maximum length is exceed",
-                callbak: value => value.length <= 25,
-              },
-            ],
           }}
         />
         <FormTextField
@@ -140,7 +133,7 @@ const AddExpenseWindow = ({
           labelText="Category:"
           disabled={true}
         />
-        <FormTextField
+        <AmountField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.amount,
@@ -148,72 +141,11 @@ const AddExpenseWindow = ({
               setStateByKey("amount", newValue);
             },
           ]}
-          placeholder="Amount"
-          labelText="Amount:"
-          symbolsRestrictions={/[0-9.]/}
-          innerElements={{
-            right: [
-              <StepperButtons
-                key="button"
-                controlParams={[
-                  state.amount,
-                  newValue => {
-                    setStateByKey("amount", newValue);
-                  },
-                ]}
-              />,
-            ],
-          }}
           validation={{
-            isRequired: true,
             validationState: validationState.amount,
             setValidationState: state => {
               setValidationStateByKey("amount", state);
             },
-            validations: [
-              {
-                message: "Invalid symbols",
-                callbak: value => !value.match(/[a-zA-Z]/),
-              },
-              {
-                message: "Maximum length is exceed",
-                callbak: value => value.length <= 12,
-              },
-              {
-                message: "Invalid decimal fraction",
-                callbak: value => {
-                  const valueTrimed = value.trim();
-                  const arr = valueTrimed.split(".");
-                  if (
-                    arr.length > 2 ||
-                    (arr.length === 2 && arr[0].length === 0)
-                  ) {
-                    return false;
-                  }
-                  return true;
-                },
-              },
-              {
-                message: "Two decimal places max",
-                callbak: value => {
-                  const valueTrimed = value.trim();
-                  const arr = valueTrimed.split(".");
-                  if (arr.length === 1) {
-                    return true;
-                  } else {
-                    if (arr[1].length > 2) {
-                      return false;
-                    }
-                    return true;
-                  }
-                },
-              },
-              {
-                callbak: value => {
-                  return !value.match(/^0\.{0,1}0{0,}$/);
-                },
-              },
-            ],
           }}
         />
         <FormTextField
@@ -226,9 +158,8 @@ const AddExpenseWindow = ({
           ]}
           placeholder="Date"
           labelText="Date:"
-          disabled={true}
         />
-        <FormTextField
+        <DescribtionField
           cssClasses={[classes.AddExpenseWindow__field_multiLine]}
           controlParams={[
             state.descriprion,
@@ -236,21 +167,11 @@ const AddExpenseWindow = ({
               setStateByKey("descriprion", newValue);
             },
           ]}
-          placeholder="Describtion"
-          labelText="Describtion:"
-          lineType="multi-line"
           validation={{
-            isRequired: false,
             validationState: validationState.descriprion,
             setValidationState: state => {
               setValidationStateByKey("descriprion", state);
             },
-            validations: [
-              {
-                message: "Maximum length is exceed",
-                callbak: value => value.length <= 1000,
-              },
-            ],
           }}
         />
       </div>
