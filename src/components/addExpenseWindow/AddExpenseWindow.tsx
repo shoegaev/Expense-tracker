@@ -7,6 +7,7 @@ import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
 import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
 import DescribtionField from "./fields/DescribtionField/DescribtionField";
+import DateField from "./fields/DateField/DateField";
 
 export interface AddExpenseWindowState extends Expense {
   isDataValid: boolean;
@@ -30,7 +31,7 @@ export const defaulValidationState: ValidationState = {
   name: {isValid: false, errMessage: null},
   categoryName: {isValid: true, errMessage: null}, //временно захардкожено//
   amount: {isValid: false, errMessage: null},
-  date: {isValid: true, errMessage: null}, //временно захардкожено//
+  date: {isValid: false, errMessage: null},
   descriprion: {isValid: true, errMessage: null},
 };
 
@@ -148,16 +149,20 @@ const AddExpenseWindow = ({
             },
           }}
         />
-        <FormTextField
+        <DateField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
-            state.categoryName,
+            state.date,
             newValue => {
               setStateByKey("date", newValue);
             },
           ]}
-          placeholder="Date"
-          labelText="Date:"
+          validation={{
+            validationState: validationState.date,
+            setValidationState: state => {
+              setValidationStateByKey("date", state);
+            },
+          }}
         />
         <DescribtionField
           cssClasses={[classes.AddExpenseWindow__field_multiLine]}
