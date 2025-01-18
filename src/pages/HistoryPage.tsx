@@ -10,7 +10,7 @@ import AddExpenseWindow, {
 } from "../components/addExpenseWindow/AddExpenseWindow";
 
 type HistoryPageProps = {
-  appState: AppData;
+  appDataState: AppData;
   addExpense: (params: Expense) => true | "Invalid Date" | "Invalid category";
 };
 
@@ -18,7 +18,7 @@ const HistoryPage = (props: HistoryPageProps) => {
   const [addWindowState, setAddWindowState] = useState<AddExpenseWindowState>(
     defaulAddExpenseWindowState,
   );
-
+  
   return (
     <div
       className={[
@@ -26,6 +26,7 @@ const HistoryPage = (props: HistoryPageProps) => {
         cl.HistoryPage,
         addWindowState.isOpen ? cl.HistoryPage_addingExpense : "",
       ].join(" ")}>
+
       <div className={cl.HistoryPage__mainContent}>
         <ExpenseList {...props}></ExpenseList>
         <div className={cl.HistoryPage__buttons}>
@@ -36,6 +37,7 @@ const HistoryPage = (props: HistoryPageProps) => {
             }}></MainButton>
         </div>
       </div>
+
       <AddExpenseWindow
         className={cl.HistoryPage__addExpenseWindow}
         AddExpenseWindowState={addWindowState}

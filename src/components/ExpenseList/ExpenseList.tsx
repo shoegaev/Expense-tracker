@@ -9,13 +9,13 @@ import {
 import ExpenseListHeader from "./ExpenseListHeader/ExpenseListHeader";
 
 type ExpenseListProps = {
-  appState: AppData;
+  appDataState: AppData;
   options?: ExpenseListOptions;
   addExpense: (params: Expense) => true | "Invalid Date" | "Invalid category";
 };
 
 const ExpenseList = ({
-  appState,
+  appDataState,
   options = {sorting: ExpenseListSorting.dateDescending},
 }: ExpenseListProps) => {
   const {searchLine, period, category, sorting} = options;
@@ -24,31 +24,31 @@ const ExpenseList = ({
   //
   let expenseIds: string[];
   if (sorting === ExpenseListSorting.dateAscending) {
-    expenseIds = [...appState.expensesSorted.date].reverse();
+    expenseIds = [...appDataState.expensesSorted.date].reverse();
   } else if (sorting === ExpenseListSorting.dateDescending) {
-    expenseIds = [...appState.expensesSorted.date];
+    expenseIds = [...appDataState.expensesSorted.date];
   } else if (sorting === ExpenseListSorting.amountAscending) {
-    expenseIds = [...appState.expensesSorted.amount];
+    expenseIds = [...appDataState.expensesSorted.amount];
   } else {
-    expenseIds = [...appState.expensesSorted.amount].reverse();
+    expenseIds = [...appDataState.expensesSorted.amount].reverse();
   }
   if (searchLine) {
     const reg = new RegExp(searchLine, "i");
-    expenseIds.filter(id => appState.expenses[id].name.match(reg));
+    expenseIds.filter(id => appDataState.expenses[id].name.match(reg));
   }
   if (category) {
     expenseIds.filter(
-      id => appState.expenses[id].categoryName === options.category,
+      id => appDataState.expenses[id].categoryName === options.category,
     );
   }
   if (period) {
     expenseIds.filter(id => {
-      const date = appState.expenses[id].date;
+      const date = appDataState.expenses[id].date;
       return period[0] < Number(date) && Number(date) < period[1];
     });
   }
   const ExpenseLines = expenseIds.map(id => {
-    return <ExpenseLine key={id} params={appState.expenses[id]}></ExpenseLine>;
+    return <ExpenseLine key={id} params={appDataState.expenses[id]}></ExpenseLine>;
   });
 
   return (

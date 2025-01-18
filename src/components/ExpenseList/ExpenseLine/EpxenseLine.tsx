@@ -1,11 +1,10 @@
 /* eslint-disable max-lines-per-function */
 import React, {useRef} from "react";
-import {AppData, Expense} from "../../../types/appDataType";
+import {Expense} from "../../../types/appDataType";
 import {expand, minimize} from "./animations/expenseLineAnimations";
 import classes from "./ExpenseLineStyle.module.scss";
 
 type ExpenseProps = {
-  appState: AppData;
   params: Expense;
 };
 
