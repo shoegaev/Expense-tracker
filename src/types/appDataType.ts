@@ -8,7 +8,6 @@ export interface Expense {
 export interface CategoryInitProps {
   color: string;
   describtion?: string;
-  name: string;
 }
 export interface Category extends CategoryInitProps {
   amount: string;

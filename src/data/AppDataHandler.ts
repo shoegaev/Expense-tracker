@@ -8,7 +8,7 @@ export class AppDataHandler {
   constructor(initData?: AppData) {
     this.appData = initData ?? {
       expenses: {},
-      categories: {food: {amount: 0, expenses: [], color: "color-code"}},
+      categories: {food: {amount: "0", expenses: [], color: "color-code"}},
       expensesByName: {},
       expensesSorted: {
         date: [],
