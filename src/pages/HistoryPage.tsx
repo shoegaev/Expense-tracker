@@ -18,7 +18,6 @@ const HistoryPage = (props: HistoryPageProps) => {
   const [addWindowState, setAddWindowState] = useState<AddExpenseWindowState>(
     defaulAddExpenseWindowState,
   );
-  
   return (
     <div
       className={[
