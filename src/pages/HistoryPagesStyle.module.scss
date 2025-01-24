@@ -17,7 +17,7 @@ $buttonsHeight: 60px;
 
     transition:
       opacity 0.5s ease,
-      left 0.5s ease;
+      top 0.5s ease;
     .HistoryPage__buttons {
       flex-shrink: 0;
       width: 100%;
@@ -33,13 +33,13 @@ $buttonsHeight: 60px;
 
   .HistoryPage__addExpenseWindow {
     position: absolute;
-    left: 100%;
-    top: 0;
+    left: 0;
+    top: 100%;
     opacity: 0;
 
     transition:
       opacity 0.5s ease,
-      left 0.5s ease;
+      top 0.5s ease;
   }
 }
 .HistoryPage > * {
@@ -47,11 +47,11 @@ $buttonsHeight: 60px;
 }
 .HistoryPage.HistoryPage_addingExpense {
   .HistoryPage__mainContent {
-    left: -100%;
+    // top: -100%;
     opacity: 0;
   }
   .HistoryPage__addExpenseWindow {
-    left: 0;
+    top: 0;
     opacity: 1;
   }
 }
