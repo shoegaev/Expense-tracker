@@ -29,7 +29,7 @@ export const defaulAddExpenseWindowState: AddExpenseWindowState = {
     },
     amount: {value: "", validation: {isValid: false, errMessage: null}},
     date: {value: "", validation: {isValid: false, errMessage: null}},
-    descriprion: {value: "", validation: {isValid: false, errMessage: null}},
+    descriprion: {value: "", validation: {isValid: true, errMessage: null}},
   },
   isDataValid: false,
   isOpen: false,
