@@ -3,13 +3,14 @@ import React, {useRef} from "react";
 import {Expense} from "../../../types/appDataType";
 import {expand, minimize} from "./animations/expenseLineAnimations";
 import classes from "./ExpenseLineStyle.module.scss";
+import getStringDate from "../../../utils/getStringDate";
 
 type ExpenseProps = {
   params: Expense;
 };
 
 const ExpenseLine = ({params}: ExpenseProps) => {
-  const date = new Date(params.date).toLocaleString();
+  const date = getStringDate(new Date(+params.date));
   const lineRef = useRef<null | HTMLDivElement>(null);
   const lineContentRef = useRef<null | HTMLDivElement>(null);
 
@@ -25,9 +26,7 @@ const ExpenseLine = ({params}: ExpenseProps) => {
   };
 
   return (
-    <div
-      ref={lineRef}
-      className={[classes.ExpenseLine].join(" ")}>
+    <div ref={lineRef} className={[classes.ExpenseLine].join(" ")}>
       <div ref={lineContentRef} className={classes.ExpenseLine_content}>
         <div className={classes.ExpenseLine_topContent}>
           <div className={classes.ExpenseLine_color}></div>
