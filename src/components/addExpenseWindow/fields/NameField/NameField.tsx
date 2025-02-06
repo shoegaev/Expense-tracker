@@ -1,17 +1,15 @@
 import React from "react";
 import FormTextField from "../../../UI/FormTextField/FormTextField";
-import {AddExpenseWindowField} from "../AddExpenseWindowFieldType";
+import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
 
-const NameField = ({validation, ...props}: AddExpenseWindowField) => {
+const NameField = ({...props}: AddExpenseWindowFieldProps) => {
   return (
     <FormTextField
       {...props}
       placeholder="Expense name"
       labelText="Name:"
-      validation={{
+      ValidationRequirements={{
         isRequired: true,
-        validationState: validation.validationState,
-        setValidationState: validation.setValidationState,
         validations: [
           {
             message: "Maximum length is exceed",

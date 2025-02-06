@@ -1,12 +1,7 @@
 import {ControlParams} from "../../../types/ControlParamsType";
-export interface AddExpenseWindowField {
+import {StateWithValidation} from "../../../types/validationTypes";
+
+export interface AddExpenseWindowFieldProps {
   cssClasses: string[];
-  controlParams: ControlParams<string>;
-  validation: {
-    validationState: {isValid: boolean; errMessage: null | string};
-    setValidationState: (state: {
-      isValid: boolean;
-      errMessage: null | string;
-    }) => void;
-  };
+  controlParams: ControlParams<StateWithValidation<string>>;
 }

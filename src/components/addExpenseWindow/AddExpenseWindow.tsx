@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {Expense} from "../../types/appDataType";
 import FormTextField from "../UI/FormTextField/FormTextField";
 import AmountField from "./fields/AmountField/AmountField";
@@ -9,10 +9,31 @@ import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
 import DescribtionField from "./fields/DescribtionField/DescribtionField";
 import DateField from "./fields/DateField/DateField";
 
-export interface AddExpenseWindowState extends Expense {
+export type AddExpenseWindowState = {
+  fields: {
+    [name in keyof Expense]: {
+      value: Expense[name];
+      validation: {isValid: boolean; errMessage: string | null};
+    };
+  };
   isDataValid: boolean;
   isOpen: boolean;
-}
+};
+
+export const defaulAddExpenseWindowState: AddExpenseWindowState = {
+  fields: {
+    name: {value: "", validation: {isValid: false, errMessage: null}},
+    categoryName: {
+      value: "food",
+      validation: {isValid: true, errMessage: null},
+    },
+    amount: {value: "", validation: {isValid: false, errMessage: null}},
+    date: {value: "", validation: {isValid: false, errMessage: null}},
+    descriprion: {value: "", validation: {isValid: true, errMessage: null}},
+  },
+  isDataValid: false,
+  isOpen: false,
+};
 
 export interface AddExpenseWindowProps {
   className?: string;
@@ -23,28 +44,6 @@ export interface AddExpenseWindowProps {
   >;
 }
 
-type ValidationState = {
-  [name in keyof Expense]: {isValid: boolean; errMessage: string | null};
-};
-
-export const defaulValidationState: ValidationState = {
-  name: {isValid: false, errMessage: null},
-  categoryName: {isValid: true, errMessage: null}, //временно захардкожено//
-  amount: {isValid: false, errMessage: null},
-  date: {isValid: false, errMessage: null},
-  descriprion: {isValid: true, errMessage: null},
-};
-
-export const defaulAddExpenseWindowState: AddExpenseWindowState = {
-  name: "",
-  categoryName: "food",
-  amount: "",
-  date: "",
-  descriprion: "",
-  isDataValid: false,
-  isOpen: false,
-};
-
 // eslint-disable-next-line max-lines-per-function
 const AddExpenseWindow = ({
   className,
@@ -52,49 +51,51 @@ const AddExpenseWindow = ({
   addExpense,
   setAddExpenseWindowState: setState,
 }: AddExpenseWindowProps) => {
-  const [validationState, setValidationState] = useState<ValidationState>(
-    defaulValidationState,
-  );
 
-  const setStateByKey = <T extends keyof AddExpenseWindowState>(
-    statePropKey: T,
-    value:
-      | AddExpenseWindowState[T]
-      | ((prevValue: AddExpenseWindowState[T]) => AddExpenseWindowState[T]),
+  const setFieldValueByKey = <T extends keyof AddExpenseWindowState["fields"]>(
+    fieldName: T,
+    valueOrHandler:
+      | AddExpenseWindowState["fields"][T]
+      | ((
+          prevValue: AddExpenseWindowState["fields"][T],
+        ) => AddExpenseWindowState["fields"][T]),
   ): void => {
-    if (typeof value === "function") {
-      setState(s => {
-        return {...s, [statePropKey]: value(s[statePropKey])};
+    if (typeof valueOrHandler === "function") {
+      setState(prev => {
+        return {
+          ...prev,
+          fields: {
+            ...prev.fields,
+            [fieldName]: valueOrHandler(prev.fields[fieldName]),
+          },
+        };
       });
     } else {
       setState({
         ...state,
-        [statePropKey]: value,
+        fields: {
+          ...state.fields,
+          [fieldName]: valueOrHandler,
+        },
       });
     }
   };
 
-  const setValidationStateByKey = (
-    key: keyof ValidationState,
-    value: {isValid: boolean; errMessage: null | string},
-  ): void => {
-    setValidationState({...validationState, [key]: value});
-  };
-
   useEffect(() => {
     let isDataValid = true;
-    for (const value of Object.values(validationState)) {
-      if (!value.isValid) {
+    for (const value of Object.values(state.fields)) {
+      if (!value.validation?.isValid) {
         isDataValid = false;
         break;
       }
     }
-    setStateByKey("isDataValid", isDataValid);
-  }, [validationState]);
+    if (state.isDataValid !== isDataValid) {
+      setState({...state, isDataValid: !state.isDataValid});
+    }
+  }, [state]);
 
   function closeAndClearWindow(): void {
     setState(defaulAddExpenseWindowState);
-    setValidationState(defaulValidationState);
   }
   return (
     <div className={`${classes.AddExpenseWindow} ${className ?? ""}`}>
@@ -110,26 +111,21 @@ const AddExpenseWindow = ({
         <NameField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
-            state.name,
+            state.fields.name,
             newValue => {
-              setStateByKey("name", newValue);
+              setFieldValueByKey("name", newValue);
             },
           ]}
-          validation={{
-            validationState: validationState.name,
-            setValidationState: state => {
-              setValidationStateByKey("name", state);
-            },
-          }}
         />
         <FormTextField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
-            state.categoryName,
+            state.fields.categoryName,
             newValue => {
-              setStateByKey("categoryName", newValue);
+              setFieldValueByKey("categoryName", newValue);
             },
           ]}
+          ValidationRequirements={{isRequired: false, validations: []}} //заглушка//
           placeholder="Category"
           labelText="Category:"
           disabled={true}
@@ -137,47 +133,29 @@ const AddExpenseWindow = ({
         <AmountField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
-            state.amount,
+            state.fields.amount,
             newValue => {
-              setStateByKey("amount", newValue);
+              setFieldValueByKey("amount", newValue);
             },
           ]}
-          validation={{
-            validationState: validationState.amount,
-            setValidationState: state => {
-              setValidationStateByKey("amount", state);
-            },
-          }}
         />
         <DateField
           cssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
-            state.date,
+            state.fields.date,
             newValue => {
-              setStateByKey("date", newValue);
+              setFieldValueByKey("date", newValue);
             },
           ]}
-          validation={{
-            validationState: validationState.date,
-            setValidationState: state => {
-              setValidationStateByKey("date", state);
-            },
-          }}
         />
         <DescribtionField
           cssClasses={[classes.AddExpenseWindow__field_multiLine]}
           controlParams={[
-            state.descriprion,
+            state.fields.descriprion,
             newValue => {
-              setStateByKey("descriprion", newValue);
+              setFieldValueByKey("descriprion", newValue);
             },
           ]}
-          validation={{
-            validationState: validationState.descriprion,
-            setValidationState: state => {
-              setValidationStateByKey("descriprion", state);
-            },
-          }}
         />
       </div>
       <span
@@ -193,7 +171,12 @@ const AddExpenseWindow = ({
         className={classes.AddExpenseWindow__submitButton}
         text="Add"
         callback={() => {
-          addExpense({...state, date: Date.now().toString()});
+          const expense: Expense = {} as Expense;
+          for (const key in state.fields) {
+            expense[key as keyof Expense] =
+              state.fields[key as keyof Expense].value;
+          }
+          addExpense(expense);
           closeAndClearWindow();
         }}
         isDisabled={!state.isDataValid}

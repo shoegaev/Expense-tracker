@@ -1,22 +1,42 @@
 /* eslint-disable max-lines-per-function */
 import React from "react";
 import FormTextField from "../../../UI/FormTextField/FormTextField";
-import {AddExpenseWindowField} from "../AddExpenseWindowFieldType";
+import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
 import getStringDate from "../../../../utils/getStringDate";
 import {ReactComponent as CalendarIcon} from "../../../../assets/icons/CalendarIcon.svg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import cl from "./DateFieldStyle.module.scss";
+import {validateValue} from "../../../../utils/validateData";
+import {ValidationRequirements} from "../../../../types/validationTypes";
 
-const DateField = ({
-  validation,
-  controlParams,
-  ...props
-}: AddExpenseWindowField) => {
-  const [value, setValue] = controlParams;
-  // console.log(value);
-  const valueInDate = new Date(value);
+const DateField = ({controlParams, ...props}: AddExpenseWindowFieldProps) => {
+  const [state, setState] = controlParams;
+  const valueInDate = new Date(state.value);
   const timestamp = valueInDate.valueOf() || Date.now();
+  const ValidationRequirements: ValidationRequirements<string> = {
+    isRequired: true,
+    validations: [
+      {
+        message: "Invalid date",
+        callbak: value => {
+          const arr = value.split("/");
+          const isDatePartsQuantityValid = arr.length === 3;
+          const isAllDatePartsArePresent =
+            typeof arr.find(x => x === "") !== "string";
+          const isDatePartsLengthValid =
+            arr[0]?.length <= 2 && arr[1]?.length <= 2 && arr[2]?.length <= 4;
+          const isDateValid = new Date(value).toString() !== "Invalid Date";
+          return (
+            isDatePartsQuantityValid &&
+            isAllDatePartsArePresent &&
+            isDatePartsLengthValid &&
+            isDateValid
+          );
+        },
+      },
+    ],
+  };
   return (
     <FormTextField
       {...props}
@@ -40,38 +60,14 @@ const DateField = ({
             dateFormat="MM/dd/yyyy"
             onChange={date => {
               if (date) {
-                setValue(getStringDate(date));
+                const stringDate = getStringDate(date);
+                setState(validateValue(stringDate, ValidationRequirements));
               }
             }}
           />,
         ],
       }}
-      validation={{
-        isRequired: true,
-        validations: [
-          {
-            message: "Invalid date",
-            callbak: value => {
-              const arr = value.split("/");
-              const isDatePartsQuantityValid = arr.length === 3;
-              const isAllDatePartsArePresent =
-                typeof arr.find(x => x === "") !== "string";
-              const isDatePartsLengthValid =
-                arr[0]?.length <= 2 &&
-                arr[1]?.length <= 2 &&
-                arr[2]?.length <= 4;
-              const isDateValid = new Date(value).toString() !== "Invalid Date";
-              return (
-                isDatePartsQuantityValid &&
-                isAllDatePartsArePresent &&
-                isDatePartsLengthValid &&
-                isDateValid
-              );
-            },
-          },
-        ],
-        ...validation,
-      }}
+      ValidationRequirements={ValidationRequirements}
     />
   );
 };
