@@ -25,7 +25,6 @@ const HistoryPage = (props: HistoryPageProps) => {
         cl.HistoryPage,
         addWindowState.isOpen ? cl.HistoryPage_addingExpense : "",
       ].join(" ")}>
-
       <div className={cl.HistoryPage__mainContent}>
         <ExpenseList {...props}></ExpenseList>
         <div className={cl.HistoryPage__buttons}>

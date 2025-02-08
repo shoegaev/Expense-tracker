@@ -1,6 +1,7 @@
 @import "../../../variables.scss";
+@import "../ExpenseListStyle.module.scss";
 .ExpenseListHeader {
-  height: 40px;
+  height: $headerHeigth;
   width: 100%;
   display: flex;
   gap: 10px;
