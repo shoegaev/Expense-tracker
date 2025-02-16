@@ -1,0 +1,24 @@
+.WindowWithNavigation {
+  overflow: hidden;
+  position: relative;
+  .WindowWithNavigation__innerElement {
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgb(137, 186, 137);
+    transform: translateX(100%);
+    opacity: 0;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease;
+  }
+  .WindowWithNavigation__innerElement_open {
+    transform: none;
+    opacity: 1;
+  }
+  .WindowWithNavigation__innerElement_cashed {
+    transform: translateX(-100%);
+  }
+}
