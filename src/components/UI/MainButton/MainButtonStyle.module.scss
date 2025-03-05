@@ -3,13 +3,21 @@
   @include centeredContent;
   min-width: 110px;
   height: 40px;
-  color: $color-headerBackground;
   padding: 0px 5px;
-  background-color: $color-interfaceDark;
   cursor: pointer;
   transition:
     scale 0.2s ease,
-    opacity 0.2s ease;
+    opacity 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.MainButton__colorDark {
+  color: $color-headerBackground;
+  background-color: $color-interfaceDark;
+}
+.MainButton__colorWhite {
+  color: black;
+  background-color: $color-headerBackground;
 }
 
 .MainButton__disabled {
@@ -18,10 +26,26 @@
 }
 
 @media (hover: hover) {
-  .MainButton:hover {
+  .MainButton__hoverScale:hover {
     scale: 1.05;
   }
-  .MainButton.MainButton__disabled:hover {
+  .MainButton__hoverScale.MainButton__disabled:hover {
     scale: 1;
+  }
+  .MainButton__hoverColor.MainButton__colorDark:hover {
+    background-color: $color-headerBackground;
+    color: black;
+  }
+  .MainButton__hoverColor.MainButton__colorDark.MainButton__disabled:hover {
+    background-color: $color-interfaceDark;
+    color: $color-headerBackground;
+  }
+  .MainButton__hoverColor.MainButton__colorWhite:hover {
+    color: $color-headerBackground;
+    background-color: $color-interfaceDark;
+  }
+  .MainButton__hoverColor.MainButton__colorWhite.MainButton__disabled:hover {
+    background-color: $color-headerBackground;
+    color: $color-interfaceDark;
   }
 }

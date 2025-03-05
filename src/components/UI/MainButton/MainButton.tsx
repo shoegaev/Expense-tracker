@@ -3,27 +3,38 @@ import classes from "./MainButtonStyle.module.scss";
 
 type MainButtonProps = {
   className?: string;
+  color?: "dark" | "white";
+  hoverType?: "scale" | "color";
   text: string;
   isDisabled?: boolean;
-  callback: () => void;
+  callback?: () => void;
 };
 
 const MainButton = ({
   text,
+  color = "dark",
+  hoverType = "scale",
   callback,
   isDisabled,
   className,
 }: MainButtonProps) => {
+  const buttonClassName = [
+    classes.MainButton,
+    isDisabled ? classes.MainButton__disabled : "",
+    color === "dark"
+      ? classes.MainButton__colorDark
+      : classes.MainButton__colorWhite,
+    hoverType === "scale"
+      ? classes.MainButton__hoverScale
+      : classes.MainButton__hoverColor,
+    className ?? "",
+  ].join(" ");
   return (
     <div
       onClick={() => {
-        if (!isDisabled) callback();
+        if (!isDisabled && callback) callback();
       }}
-      className={[
-        classes.MainButton,
-        isDisabled ? classes.MainButton__disabled : "",
-        className ?? "",
-      ].join(" ")}>
+      className={buttonClassName}>
       <span className={classes.MainButton_text}>{text}</span>
     </div>
   );
