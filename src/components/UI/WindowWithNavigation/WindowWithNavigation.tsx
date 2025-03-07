@@ -10,16 +10,17 @@ export interface WindowWithNavigationElement {
 
 export interface WindowWithNavigationState {
   history: string[];
-  elements: WindowWithNavigationElement[];
 }
 
 export interface WindowWithNavigationProps {
   controlParams: ControlParams<WindowWithNavigationState>;
+  elements: WindowWithNavigationElement[];
   goToRef: React.MutableRefObject<((to?: string | number) => void) | null>;
   cssClasses?: string[];
 }
 
 const WindowWithNavigation = ({
+  elements,
   goToRef,
   cssClasses,
   controlParams,
@@ -29,35 +30,32 @@ const WindowWithNavigation = ({
     if (typeof to === "number") {
       if (to < 0) {
         setState({
-          ...state,
           history: state.history.slice(
             0,
             Math.abs(to) >= state.history.length ? 1 : to,
           ),
         });
       } else {
-        setState({...state, history: state.history.slice(0, to)});
+        setState({history: state.history.slice(0, to)});
       }
       return;
     }
     const elementName = to ?? state.history[0];
-    if (!state.elements.find(obj => obj.name === elementName)) {
+    if (!elements.find(obj => obj.name === elementName)) {
       return;
     }
     if (state.history.includes(elementName)) {
       setState({
-        ...state,
         history: state.history.slice(0, state.history.indexOf(elementName) + 1),
       });
     } else {
       setState({
-        ...state,
         history: [...state.history, elementName],
       });
     }
   };
   const className = [cl.WindowWithNavigation, ...(cssClasses || [])].join(" ");
-  const innerElements = state.elements.map(obj => {
+  const innerElements = elements.map(obj => {
     const isElementInHistory = state.history.includes(obj.name);
     const isElementOpened =
       isElementInHistory &&
@@ -80,4 +78,27 @@ const WindowWithNavigation = ({
 };
 
 export default WindowWithNavigation;
+// окно с анимированными переходами между "страницами" и историей:
+// -state: {
+// -history: string[] - массив с именами страниц в порядке их открытия (т.е. история),
+// последний элемент - текущий открытый
+// -elements: - массив элементов;
+// элемент: {
+//  element: JSX
+//  name: string
+// }
+//props {
+// -goToRef: (to: string)=>void - реф в который будет записана функция навигации к опред элементу
+// controlParams: ....
+// }
+//
+//
+// }
 
+// три контейнера:
+// -левый: элементы являющиеся "предыдущими"
+// для открытого на данный момент
+// -средний: текущий открытый элемент
+// -правый контейнер: все остальные элементы
+
+// история: массив с айди элементов в порядке открытия

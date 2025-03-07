@@ -4,4 +4,11 @@
   border: 2px solid $color-interfaceDark;
   border-left: 2px solid $color-interfaceDark;
   border-right: 2px solid $color-interfaceDark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .SortsAndFilters__content {
+    width: calc(100% - 24px);
+    height: calc(100% - 12px);
+  }
 }

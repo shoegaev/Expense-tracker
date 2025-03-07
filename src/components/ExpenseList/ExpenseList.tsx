@@ -9,7 +9,6 @@ import {
 } from "../../types/sortsAndFiltersType";
 import ExpenseListHeader from "./ExpenseListHeader/ExpenseListHeader";
 import SortsAndFilters, {
-  SortsAndFiltersDeafaultState,
   SortsAndFiltersState,
 } from "../SortsAndFilters/SortsAndFilters";
 
@@ -17,6 +16,14 @@ type ExpenseListProps = {
   appDataState: AppData;
   options?: ExpenseListSortsAndFilters;
   addExpense: (params: Expense) => true | "Invalid Date" | "Invalid category";
+};
+
+const SortsAndFiltersDeafaultState: SortsAndFiltersState = {
+  isOpen: false,
+  sorting: {
+    options: Object.values(ExpenseListSorting),
+    selected: ExpenseListSorting.dateDescending,
+  },
 };
 
 const ExpenseList = ({

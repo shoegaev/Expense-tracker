@@ -1,0 +1,12 @@
+.SortingSelectionPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  .SortingSelectionPage__backButton {
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+  }
+}
