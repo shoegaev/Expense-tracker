@@ -3,46 +3,51 @@ import cl from "./SelectionListStyle.module.scss";
 import {ControlParams} from "../../../types/ControlParamsType";
 
 export interface SelectionListState {
-  options?: string[];
-  selected?: number | number[];
+  options: string[];
+  selected: string | string[];
 }
-// if selected - number or undefined, multiple selection is off
+// if selected: string or undefined, multiple selection is off
 
 export interface SelectionListProps {
-  controlParams: ControlParams<SelectionListState>;
   cssClasses?: string[];
+  controlParams: ControlParams<SelectionListState>;
+  onClick?: (option: string, selected: string | string[]) => void;
 }
-const SelectionList = ({controlParams, cssClasses}: SelectionListProps) => {
+const SelectionList = ({
+  controlParams,
+  cssClasses,
+  onClick,
+}: SelectionListProps) => {
   const [state, setState] = controlParams;
-  const isIndexSelected = (index: number): boolean =>
-    (typeof state.selected === "object" && state.selected.includes(index)) ||
-    state.selected === index;
-
-  const options = state.options?.map((option, index) => {
+  const isValueSelected = (value: string): boolean =>
+    (typeof state.selected === "object" && state.selected.includes(value)) ||
+    state.selected === value;
+  const options = state.options?.map(option => {
     const className = [
       cl.SelectionList__option,
-      isIndexSelected(index) ? cl.SelectionList__option_selected : "",
+      isValueSelected(option) ? cl.SelectionList__option_selected : "",
     ].join(" ");
     return (
       <div
         className={className}
-        key={index}
+        key={option}
         onClick={() => {
-          if (isIndexSelected(index)) {
+          if (onClick) onClick(option, state.selected);
+          if (isValueSelected(option)) {
             if (typeof state.selected === "object") {
               setState({
                 ...state,
-                selected: state.selected.filter(i => i !== index),
+                selected: state.selected.filter(i => i !== option),
               });
             }
           } else {
             if (typeof state.selected === "object") {
               setState({
                 ...state,
-                selected: [...state.selected, index],
+                selected: [...state.selected, option],
               });
             } else {
-              setState({...state, selected: index});
+              setState({...state, selected: option});
             }
           }
         }}>
