@@ -26,6 +26,7 @@ const SortingSelectionPage = ({
       </div>
       <div>Select sorting type</div>
       <SelectionList
+        cssClasses={[cl.SortingSelectionPage__list]}
         controlParams={controlParams}
         onClick={goToMain}></SelectionList>
     </div>

@@ -15,6 +15,10 @@
   color: $color-headerBackground;
   background-color: $color-interfaceDark;
 }
+.MainButton__colorGrey {
+  color: black;
+  background-color: $color-mainBackground;
+}
 .MainButton__colorWhite {
   color: black;
   background-color: $color-headerBackground;
@@ -40,11 +44,13 @@
     background-color: $color-interfaceDark;
     color: $color-headerBackground;
   }
-  .MainButton__hoverColor.MainButton__colorWhite:hover {
+  .MainButton__hoverColor.MainButton__colorWhite:hover,
+  .MainButton__hoverColor.MainButton__colorGrey:hover {
     color: $color-headerBackground;
     background-color: $color-interfaceDark;
   }
-  .MainButton__hoverColor.MainButton__colorWhite.MainButton__disabled:hover {
+  .MainButton__hoverColor.MainButton__colorWhite.MainButton__disabled:hover,
+  .MainButton__hoverColor.MainButton__colorGrey.MainButton__disabled:hover {
     background-color: $color-headerBackground;
     color: $color-interfaceDark;
   }

@@ -3,6 +3,10 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  gap: 12px;
+  .SortingSelectionPage__list {
+    width: 240px;
+  }
   .SortingSelectionPage__backButton {
     position: absolute;
     left: 0;

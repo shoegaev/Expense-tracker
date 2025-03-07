@@ -51,7 +51,6 @@ const SelectionList = ({
             }
           }
         }}>
-        <span className={cl.SelectionList__selectedStatus}>Selected</span>
         <span className={cl.SelectionList__optionText}>{option}</span>
       </div>
     );

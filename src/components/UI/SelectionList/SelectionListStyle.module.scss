@@ -1,41 +1,43 @@
 @import "../../../variables.scss";
 
 .SelectionList {
-  padding: 12px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex: 0;
-  gap: 12px;
   overflow: auto;
   .SelectionList__option {
-    width: calc(100% - 24px);
-    height: 48px;
+    width: calc(100%);
+    height: 52px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: $color-mainBackground;
-    padding: 4px;
-    position: relative;
+    padding: 6px;
     flex-shrink: 0;
-    .SelectionList__selectedStatus {
-      opacity: 0;
-      font-size: 14px;
-      position: absolute;
-      right: 4px;
-      top: 0;
-      transition: opacity 0.2s ease;
-    }
+    transition: scale 0.2s ease;
     .SelectionList__optionText {
+      width: 100%;
+      height: 100%;
+      background-color: $color-mainBackground;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
   .SelectionList__option_selected {
-    .SelectionList__selectedStatus {
-      opacity: 0.5;
+    .SelectionList__optionText {
+      background-color: $color-interfaceDark;
+      color: $color-headerBackground;
     }
+  }
+}
+@media (hover: hover) {
+  *:has(.SelectionList__option):has(.SelectionList__option:hover)
+    > .SelectionList__option:not(:hover) {
+    scale: 0.9;
   }
 }
 .SelectionList::-webkit-scrollbar {

@@ -3,7 +3,7 @@ import classes from "./MainButtonStyle.module.scss";
 
 type MainButtonProps = {
   className?: string;
-  color?: "dark" | "white";
+  color?: "dark" | "white" | "grey";
   hoverType?: "scale" | "color";
   text: string;
   isDisabled?: boolean;
@@ -23,7 +23,9 @@ const MainButton = ({
     isDisabled ? classes.MainButton__disabled : "",
     color === "dark"
       ? classes.MainButton__colorDark
-      : classes.MainButton__colorWhite,
+      : color === "white"
+        ? classes.MainButton__colorWhite
+        : classes.MainButton__colorGrey,
     hoverType === "scale"
       ? classes.MainButton__hoverScale
       : classes.MainButton__hoverColor,
