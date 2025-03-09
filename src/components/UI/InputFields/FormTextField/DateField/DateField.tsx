@@ -1,16 +1,19 @@
 /* eslint-disable max-lines-per-function */
 import React from "react";
-import FormTextField from "../../../UI/InputFields/FormTextField/FormTextField";
-import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
-import getStringDate from "../../../../utils/getStringDate";
-import {ReactComponent as CalendarIcon} from "../../../../assets/icons/CalendarIcon.svg";
+import FormTextField from "../FormTextField";
+import {FieldWithSpecifiedValifationProps} from "../FieldWithSpecifiedValifationType";
+import getStringDate from "../../../../../utils/getStringDate";
+import {ReactComponent as CalendarIcon} from "../../../..//../assets/icons/CalendarIcon.svg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import cl from "./DateFieldStyle.module.scss";
-import {validateValue} from "../../../../utils/validateData";
-import {ValidationRequirements} from "../../../../types/validationTypes";
+import {validateValue} from "../../../../../utils/validateData";
+import {ValidationRequirements} from "../../../../../types/validationTypes";
 
-const DateField = ({controlParams, ...props}: AddExpenseWindowFieldProps) => {
+const DateField = ({
+  controlParams,
+  ...props
+}: FieldWithSpecifiedValifationProps) => {
   const [state, setState] = controlParams;
   const valueInDate = new Date(state.value);
   const timestamp = valueInDate.valueOf() || Date.now();
@@ -40,8 +43,6 @@ const DateField = ({controlParams, ...props}: AddExpenseWindowFieldProps) => {
   return (
     <FormTextField
       {...props}
-      placeholder="MM/DD/YYYY"
-      labelText="Date:"
       controlParams={controlParams}
       symbolsRestrictions={/[0-9/]/}
       innerElements={{

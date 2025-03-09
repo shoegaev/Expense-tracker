@@ -1,12 +1,12 @@
 /* eslint-disable max-lines-per-function */
 import React from "react";
-import FormTextField from "../../../UI/InputFields/FormTextField/FormTextField";
-import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
-import StepperButtons from "../../../UI/StepperButtons/StepperButtons";
-import {ValidationRequirements} from "../../../../types/validationTypes";
-import {validateValue} from "../../../../utils/validateData";
+import FormTextField from "../FormTextField";
+import {FieldWithSpecifiedValifationProps} from "../FieldWithSpecifiedValifationType";
+import StepperButtons from "../../../StepperButtons/StepperButtons";
+import {ValidationRequirements} from "../../../../../types/validationTypes";
+import {validateValue} from "../../../../../utils/validateData";
 
-const AmountField = ({...props}: AddExpenseWindowFieldProps) => {
+const NumberField = ({...props}: FieldWithSpecifiedValifationProps) => {
   const [state, setState] = props.controlParams;
   const ValidationRequirements: ValidationRequirements<string> = {
     isRequired: true,
@@ -55,8 +55,6 @@ const AmountField = ({...props}: AddExpenseWindowFieldProps) => {
   return (
     <FormTextField
       {...props}
-      placeholder="Amount"
-      labelText="Amount:"
       symbolsRestrictions={/[0-9.]/}
       innerElements={{
         right: [
@@ -87,4 +85,4 @@ const AmountField = ({...props}: AddExpenseWindowFieldProps) => {
   );
 };
 
-export default AmountField;
+export default NumberField;
