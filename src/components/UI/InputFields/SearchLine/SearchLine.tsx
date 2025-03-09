@@ -1,8 +1,8 @@
 import React from "react";
 import TextField from "../TextField/TextField";
-import {ControlParams} from "../../../types/ControlParamsType";
-import {ReactComponent as MagnifierIcon} from "../../../assets/icons/MagnifierIcon.svg";
-import {ReactComponent as CrossIcon} from "../../../assets/icons/CrossIcon.svg";
+import {ControlParams} from "../../../../types/ControlParamsType";
+import {ReactComponent as MagnifierIcon} from "../../../../assets/icons/MagnifierIcon.svg";
+import {ReactComponent as CrossIcon} from "../../../../assets/icons/CrossIcon.svg";
 
 import cl from "./SearchLine.module.scss";
 

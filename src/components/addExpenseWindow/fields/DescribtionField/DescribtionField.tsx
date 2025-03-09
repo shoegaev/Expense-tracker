@@ -1,5 +1,5 @@
 import React from "react";
-import FormTextField from "../../../UI/FormTextField/FormTextField";
+import FormTextField from "../../../UI/InputFields/FormTextField/FormTextField";
 import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
 
 const DescribtionField = ({...props}: AddExpenseWindowFieldProps) => {

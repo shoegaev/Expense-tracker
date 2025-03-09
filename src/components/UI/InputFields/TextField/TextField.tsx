@@ -1,8 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import React, {FormEventHandler} from "react";
-import {ControlParams} from "../../../types/ControlParamsType";
+import {ControlParams} from "../../../../types/ControlParamsType";
 import cl from "./TextField.module.scss";
-
 
 export interface TextFieldProps {
   controlParams: ControlParams<string>;

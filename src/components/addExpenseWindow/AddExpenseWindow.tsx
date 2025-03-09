@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Expense} from "../../types/appDataType";
-import FormTextField from "../UI/FormTextField/FormTextField";
+import FormTextField from "../UI/InputFields/FormTextField/FormTextField";
 import AmountField from "./fields/AmountField/AmountField";
 import NameField from "./fields/NameField/NameField";
 import classes from "./AddExpenseWindowStyle.module.scss";

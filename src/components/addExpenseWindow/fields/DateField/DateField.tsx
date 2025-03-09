@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import React from "react";
-import FormTextField from "../../../UI/FormTextField/FormTextField";
+import FormTextField from "../../../UI/InputFields/FormTextField/FormTextField";
 import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
 import getStringDate from "../../../../utils/getStringDate";
 import {ReactComponent as CalendarIcon} from "../../../../assets/icons/CalendarIcon.svg";
