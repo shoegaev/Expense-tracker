@@ -91,6 +91,8 @@
   }
   .AddExpenseWindow__submitButton {
     flex-shrink: 0;
+    width: 110px;
+    height: 40px;
   }
 }
 @media (max-width: 660px) {
