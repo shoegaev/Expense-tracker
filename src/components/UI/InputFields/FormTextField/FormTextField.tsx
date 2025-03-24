@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
-import LabeledTextField from "../LabeledTextField/LabeledTextField";
-import TextField, {TextFieldProps} from "../TextField/TextField";
+import LabeledTextField, {
+  LabeledTextFieldProps,
+} from "../LabeledTextField/LabeledTextField";
+import TextField from "../TextField/TextField";
 import {ReactComponent as ErrorIcon} from "../../../../assets/icons/ErrorIcon.svg";
 import {ControlParams} from "../../../../types/ControlParamsType";
 import cl from "./FormTextFieldStyle.module.scss";
@@ -10,7 +12,10 @@ import {
 } from "../../../../types/validationTypes";
 import {validateValue} from "../../../../utils/validateData";
 
-export type FormTextFieldProps = Omit<TextFieldProps, "controlParams"> & {
+export type FormTextFieldProps = Omit<
+  LabeledTextFieldProps,
+  "controlParams"
+> & {
   controlParams: ControlParams<StateWithValidation<string>>;
   labelText?: string;
   ValidationRequirements: ValidationRequirements<string>;

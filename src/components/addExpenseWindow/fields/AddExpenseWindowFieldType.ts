@@ -4,4 +4,5 @@ import {StateWithValidation} from "../../../types/validationTypes";
 export interface AddExpenseWindowFieldProps {
   cssClasses: string[];
   controlParams: ControlParams<StateWithValidation<string>>;
+  fieldCssClasses?: string[];
 }

@@ -106,9 +106,10 @@ const AddExpenseWindow = ({
         onClick={closeAndClearWindow}>
         <ArrowIcon className={classes.AddExpenseWindow__backButtonIcon} />
       </div>
-      <div className={classes.AddExpenseWindow__fields}>
+      <div className={classes.AddExpenseWindow__formFields}>
         <NameField
-          cssClasses={[classes.AddExpenseWindow__field]}
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.name,
             newValue => {
@@ -117,7 +118,8 @@ const AddExpenseWindow = ({
           ]}
         />
         <FormTextField
-          cssClasses={[classes.AddExpenseWindow__field]}
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.categoryName,
             newValue => {
@@ -132,7 +134,8 @@ const AddExpenseWindow = ({
         <NumberField
           placeholder="Amount"
           labelText="Amount:"
-          cssClasses={[classes.AddExpenseWindow__field]}
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.amount,
             newValue => {
@@ -143,7 +146,8 @@ const AddExpenseWindow = ({
         <DateField
           placeholder="MM/DD/YYYY"
           labelText="Date"
-          cssClasses={[classes.AddExpenseWindow__field]}
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.date,
             newValue => {
@@ -152,7 +156,11 @@ const AddExpenseWindow = ({
           ]}
         />
         <DescribtionField
-          cssClasses={[classes.AddExpenseWindow__field_multiLine]}
+          cssClasses={[
+            classes.AddExpenseWindow__formField,
+            classes.AddExpenseWindow__formField_multiLine,
+          ]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.descriprion,
             newValue => {

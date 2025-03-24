@@ -5,12 +5,13 @@
   justify-content: center;
   position: relative;
   font-size: inherit;
-  background-color: $color-interfaceBright;
+  background-color: $color-headerBackground;
   transition:
     outline 0.2s ease,
     opacity 0.2s ease;
   padding: 5px;
   gap: 5px;
+  cursor: text;
   .TextField__textArea {
     font-size: inherit;
     font-family: inherit;

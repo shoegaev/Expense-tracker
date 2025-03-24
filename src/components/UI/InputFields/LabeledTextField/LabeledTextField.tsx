@@ -3,15 +3,15 @@ import TextField, {TextFieldProps} from "../TextField/TextField";
 import cl from "./LabeledTextField.module.scss";
 
 export interface LabeledTextFieldProps extends TextFieldProps {
-  labelText: string;
+  labelText?: string;
   cssClasses?: string[];
-  textFieldCssClasses?: string[];
+  fieldCssClasses?: string[];
 }
 
 const LabeledTextField = ({
   labelText,
   cssClasses,
-  textFieldCssClasses,
+  fieldCssClasses,
   ...props
 }: LabeledTextFieldProps) => {
   const id = useId();
@@ -22,7 +22,7 @@ const LabeledTextField = ({
       <TextField
         cssClasses={[
           cl.LabeledTextField__textField,
-          ...(textFieldCssClasses ?? []),
+          ...(fieldCssClasses ?? []),
         ]}
         id={id}
         {...props}
