@@ -24,6 +24,19 @@ const SortsAndFiltersDeafaultState: SortsAndFiltersState = {
     options: Object.values(ExpenseListSorting),
     selected: ExpenseListSorting.dateDescending,
   },
+  filters: {
+    period: {
+      type: "date",
+      isActive: false,
+      fields: {
+        from: "",
+        to: "",
+      },
+      title: "Period",
+      heading: "Period filter",
+      textWhenNotSelected: "All"
+    },
+  },
 };
 
 const ExpenseList = ({

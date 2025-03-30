@@ -5,15 +5,21 @@ import cl from "./SortsAndFiltersStyle.module.scss";
 import WindowWithNavigation, {
   WindowWithNavigationProps,
   WindowWithNavigationState,
+  WindowWithNavigationElement,
 } from "../UI/WindowWithNavigation/WindowWithNavigation";
 import SortsAndFiltersMainPage from "./InnerElements/MainPage/SortsAndFiltersMainPage";
 import SortingSelectionPage from "./InnerElements/sortingSelectionPage/SortingSelectionPage";
+import {FilterPage} from "./InnerElements/filterPagesTypes";
+import DateFilterPage from "./InnerElements/DateFilterPage/DateFilterPage";
 
 export interface SortsAndFiltersState {
   isOpen: boolean;
   sorting: {
     options: string[];
     selected: string;
+  };
+  filters: {
+    [filterName: string]: FilterPage;
   };
 }
 
@@ -30,18 +36,31 @@ const SortsAndFilters = ({
 }: SortsAndFiltersProps) => {
   const [state, setState] = controlParams;
   const windowRef = useRef<null | HTMLDivElement>(null);
-  const onClickHandler = (e: Event) => {
-    if (windowRef.current && !windowRef.current.contains(e.target as Node)) {
-      setState({...state, isOpen: false});
+  const onPointerDownHandler = (e: Event) => {
+    if (windowRef.current && windowRef.current.contains(e.target as Node)) {
+      return;
     }
+    window.addEventListener(
+      "pointerup",
+      e => {
+        if (
+          windowRef.current &&
+          !windowRef.current.contains(e.target as Node)
+        ) {
+          setTimeout(() => {
+            setState({...state, isOpen: false});
+          }, 0);
+        }
+      },
+      {once: true},
+    );
   };
-  useEffect(() => {}, [state.isOpen]);
   useEffect(() => {
     if (state.isOpen) {
-      document.addEventListener("click", onClickHandler);
+      document.addEventListener("pointerdown", onPointerDownHandler);
     }
     return () => {
-      document.removeEventListener("click", onClickHandler);
+      document.removeEventListener("pointerdown", onPointerDownHandler);
     };
   });
 
@@ -51,8 +70,18 @@ const SortsAndFilters = ({
       name: "main",
       element: (
         <SortsAndFiltersMainPage
+          cssClasses={[cl.SortsAndFilters__innerPage]}
           sorting={state.sorting.selected}
           goToRef={goToRef}
+          controlParams={[
+            ////////////////////////////////////////////////////
+            {filters: state.filters},
+            newState => {
+              if (typeof newState !== "function") {
+                setState({...state, filters: newState.filters});
+              }
+            },
+          ]}
         />
       ),
     },
@@ -60,6 +89,7 @@ const SortsAndFilters = ({
       name: "sorting",
       element: (
         <SortingSelectionPage
+          cssClasses={[cl.SortsAndFilters__innerPage]}
           goToRef={goToRef}
           controlParams={[
             state.sorting,
@@ -84,6 +114,42 @@ const SortsAndFilters = ({
       ),
     },
   ];
+  Object.keys(state.filters).forEach(key => {
+    const filter = state.filters[key];
+    let element: WindowWithNavigationElement;
+    if (filter.type === "date") {
+      element = {
+        name: key,
+        element: (
+          <DateFilterPage
+            goToRef={goToRef}
+            cssClasses={[cl.SortsAndFilters__innerPage]}
+            heading={state.filters[key].heading}
+            controlParams={[
+              filter.fields,
+              newState => {
+                if (typeof newState !== "function") {
+                  setState({
+                    ...state,
+                    filters: {
+                      ...state.filters,
+                      [key]: {
+                        ...state.filters[key],
+                        fields: newState,
+                      },
+                    },
+                  });
+                }
+              },
+            ]}
+          />
+        ),
+      };
+    } else {
+      element = {name: "", element: <div></div>};
+    }
+    elements.push(element);
+  });
   const [windowWithNavigationState, setWindowWithNavigationState] =
     useState<WindowWithNavigationState>({
       history: ["main"],

@@ -1,4 +1,7 @@
 .SortsAndFiltersMainPage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   .SortsAndFiltersMainPage__sorting {
     display: flex;
     flex-direction: column;
@@ -11,5 +14,8 @@
       height: 40px;
       align-self: center;
     }
+  }
+  .SortsAndFiltersMainPage__FiltersSection {
+
   }
 }

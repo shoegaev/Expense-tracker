@@ -8,6 +8,7 @@
     opacity 0.2s ease,
     background-color 0.2s ease,
     color 0.2s ease;
+  user-select: none;
 }
 .MainButton__colorDark {
   color: $color-headerBackground;

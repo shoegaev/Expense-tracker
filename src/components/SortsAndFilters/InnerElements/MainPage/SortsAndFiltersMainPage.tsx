@@ -2,9 +2,19 @@ import React from "react";
 import cl from "./SortsAndFiltersMainPageStyles.module.scss";
 import MainButton from "../../../UI/MainButton/MainButton";
 import {WindowWithNavigationProps} from "../../../UI/WindowWithNavigation/WindowWithNavigation";
+import {FilterPage} from "../filterPagesTypes";
+import {ControlParams} from "../../../../types/ControlParamsType";
+import FiltersSection from "./FiltersSection/FIltersSection";
+
+export interface SortsAndFiltersMainPageState {
+  filters: {
+    [filterName: string]: FilterPage;
+  };
+}
 
 export interface SortsAndFiltersMainPageProps {
   cssClasses?: string[];
+  controlParams: ControlParams<SortsAndFiltersMainPageState>;
   sorting: string;
   goToRef: WindowWithNavigationProps["goToRef"];
 }
@@ -12,6 +22,7 @@ export interface SortsAndFiltersMainPageProps {
 const SortsAndFiltersMainPage = ({
   cssClasses,
   sorting,
+  controlParams,
   goToRef,
 }: SortsAndFiltersMainPageProps) => {
   return (
@@ -31,6 +42,11 @@ const SortsAndFiltersMainPage = ({
           }}
         />
       </div>
+      <FiltersSection
+        cssClasses={cl.SortsAndFiltersMainPage__FiltersSection}
+        goToRef={goToRef}
+        controlParams={controlParams}
+      />
     </div>
   );
 };

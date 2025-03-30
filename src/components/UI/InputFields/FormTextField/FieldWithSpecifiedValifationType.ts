@@ -7,4 +7,5 @@ export interface FieldWithSpecifiedValifationProps {
   controlParams: ControlParams<StateWithValidation<string>>;
   placeholder?: string;
   labelText?: string;
+  isRequired?: boolean;
 }

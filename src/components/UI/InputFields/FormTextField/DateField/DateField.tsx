@@ -12,13 +12,14 @@ import {ValidationRequirements} from "../../../../../types/validationTypes";
 
 const DateField = ({
   controlParams,
+  isRequired = true,
   ...props
 }: FieldWithSpecifiedValifationProps) => {
   const [state, setState] = controlParams;
   const valueInDate = new Date(state.value);
   const timestamp = valueInDate.valueOf() || Date.now();
   const ValidationRequirements: ValidationRequirements<string> = {
-    isRequired: true,
+    isRequired: isRequired,
     validations: [
       {
         message: "Invalid date",

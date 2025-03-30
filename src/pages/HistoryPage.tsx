@@ -29,6 +29,7 @@ const HistoryPage = (props: HistoryPageProps) => {
         <ExpenseList {...props}></ExpenseList>
         <div className={cl.HistoryPage__buttons}>
           <MainButton
+            className={cl.HistoryPage__addButton}
             text="Add expense"
             callback={() => {
               setAddWindowState({...addWindowState, isOpen: true});

@@ -1,0 +1,52 @@
+@import "../../../../variables.scss";
+.DateFilterPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 36px;
+  height: 100%;
+  .DateFilterPage__backButton {
+    cursor: pointer;
+    position: absolute;
+    top: 24px;
+    left: 12px;
+  }
+  .DateFilterPage__heading {
+  }
+  .DateFilterPage__fields {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .DateFilterPage__dateField {
+      width: 100%;
+      .DateFilterPage__field {
+        background-color: $color-headerBackground;
+        height: 40px;
+      }
+    }
+  }
+  .DateFilterPage__buttonContainer {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 6px;
+    align-items: center;
+    .DateFilterPage__warningText {
+      color: $color-interfaceDark;
+      font-size: $fontSizeUnderline;
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+    .DateFilterPage__warningText_visible {
+      opacity: 1;
+    }
+    .DateFilterPage__submitButton {
+      width: 90px;
+      height: 40px;
+    }
+  }
+}

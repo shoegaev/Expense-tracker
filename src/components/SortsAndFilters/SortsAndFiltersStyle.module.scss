@@ -8,7 +8,10 @@
   align-items: center;
   justify-content: center;
   .SortsAndFilters__content {
-    width: calc(100% - 24px);
-    height: calc(100% - 12px);
+    width: calc(100%);
+    height: calc(100%);
+    .SortsAndFilters__innerPage {
+      padding: 24px 12px;
+    }
   }
 }

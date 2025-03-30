@@ -40,7 +40,7 @@ const WindowWithNavigation = ({
       }
       return;
     }
-    const elementName = to ?? state.history[0];
+    const elementName = to ?? state.history[state.history.length - 2];
     if (!elements.find(obj => obj.name === elementName)) {
       return;
     }

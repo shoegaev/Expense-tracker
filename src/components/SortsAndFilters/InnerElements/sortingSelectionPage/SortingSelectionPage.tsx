@@ -16,19 +16,19 @@ const SortingSelectionPage = ({
   goToRef,
   controlParams,
 }: SortingSelectionProps) => {
-  const goToMain = () => {
-    if (goToRef.current) goToRef.current("main");
+  const goBack = () => {
+    if (goToRef.current) goToRef.current();
   };
   return (
     <div className={[cl.SortingSelectionPage, ...(cssClasses ?? [])].join(" ")}>
-      <div onClick={goToMain} className={cl.SortingSelectionPage__backButton}>
+      <div onClick={goBack} className={cl.SortingSelectionPage__backButton}>
         {"<-"}
       </div>
       <div>Select sorting type</div>
       <SelectionList
         cssClasses={[cl.SortingSelectionPage__list]}
         controlParams={controlParams}
-        onClick={goToMain}></SelectionList>
+        onClick={goBack}></SelectionList>
     </div>
   );
 };
