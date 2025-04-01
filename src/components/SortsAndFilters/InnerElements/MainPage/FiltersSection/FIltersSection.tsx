@@ -29,7 +29,7 @@ const FiltersSection = ({
     const filter = filters[filterName];
     const fields = filter.fields;
     let textValue: string;
-    if (filter.type === "date") {
+    if (filter.type === "date" || filter.type === "number") {
       textValue =
         fields.from && fields.to
           ? `${fields.from} - ${fields.to}`

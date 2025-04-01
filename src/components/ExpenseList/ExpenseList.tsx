@@ -27,14 +27,23 @@ const SortsAndFiltersDeafaultState: SortsAndFiltersState = {
   filters: {
     period: {
       type: "date",
-      isActive: false,
       fields: {
         from: "",
         to: "",
       },
       title: "Period",
       heading: "Period filter",
-      textWhenNotSelected: "All"
+      textWhenNotSelected: "All",
+    },
+    amount: {
+      type: "number",
+      fields: {
+        from: "",
+        to: "",
+      },
+      title: "Amount",
+      heading: "Amount filter",
+      textWhenNotSelected: "All",
     },
   },
 };

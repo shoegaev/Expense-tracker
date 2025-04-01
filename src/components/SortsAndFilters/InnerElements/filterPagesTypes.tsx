@@ -1,23 +1,19 @@
 interface FilterPageBase {
-  isActive: boolean;
   title: string;
   heading: string;
   textWhenNotSelected: string;
 }
 
-export interface DateFilterPage extends FilterPageBase {
-  type: "date";
+export interface RangeFilterPage extends FilterPageBase {
+  type: "date" | "number";
   fields: {
     from: string;
     to: string;
   };
-}
-
-export interface NumberFilterPage extends FilterPageBase {
-  type: "number";
-  fields: {
-    [fieldName: string]: string;
+  rangeSelector?: {
+    max: string;
+    min: string;
   };
 }
 
-export type FilterPage = DateFilterPage | NumberFilterPage;
+export type FilterPage = RangeFilterPage;

@@ -24,7 +24,9 @@ const SortingSelectionPage = ({
       <div onClick={goBack} className={cl.SortingSelectionPage__backButton}>
         {"<-"}
       </div>
-      <div>Select sorting type</div>
+      <div className={cl.SortingSelectionPage__heading}>
+        Select sorting type
+      </div>
       <SelectionList
         cssClasses={[cl.SortingSelectionPage__list]}
         controlParams={controlParams}

@@ -19,7 +19,7 @@ $horizontalBorderHeight: 2px;
     z-index: 2;
     top: calc($headerHeigth + $paddingTop + $gap);
     left: 0;
-    width: 350px;
+    width: 375px;
     height: calc(
       100% - ($headerHeigth + $paddingTop + $gap + 2 * $horizontalBorderHeight)
     );

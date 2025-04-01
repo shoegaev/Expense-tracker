@@ -1,33 +1,31 @@
 @import "../../../../variables.scss";
-.DateFilterPage {
+.RangeFilterPage {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   gap: 36px;
-  height: 100%;
-  .DateFilterPage__backButton {
+  .RangeFilterPage__backButton {
     cursor: pointer;
     position: absolute;
     top: 24px;
     left: 12px;
   }
-  .DateFilterPage__heading {
+  .RangeFilterPage__heading {
   }
-  .DateFilterPage__fields {
+  .RangeFilterPage__fields {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    .DateFilterPage__dateField {
+    .RangeFilterPage__dateField {
       width: 100%;
-      .DateFilterPage__field {
-        background-color: $color-headerBackground;
+      .RangeFilterPage__field {
         height: 40px;
       }
     }
   }
-  .DateFilterPage__buttonContainer {
+  .RangeFilterPage__buttonContainer {
     width: 100%;
     flex-grow: 1;
     display: flex;
@@ -35,16 +33,16 @@
     justify-content: end;
     gap: 6px;
     align-items: center;
-    .DateFilterPage__warningText {
+    .RangeFilterPage__warningText {
       color: $color-interfaceDark;
       font-size: $fontSizeUnderline;
       transition: opacity 0.2s ease;
       opacity: 0;
     }
-    .DateFilterPage__warningText_visible {
+    .RangeFilterPage__warningText_visible {
       opacity: 1;
     }
-    .DateFilterPage__submitButton {
+    .RangeFilterPage__submitButton {
       width: 90px;
       height: 40px;
     }

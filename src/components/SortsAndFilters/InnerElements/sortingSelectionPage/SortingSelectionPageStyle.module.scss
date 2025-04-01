@@ -4,7 +4,11 @@
   align-items: center;
   position: relative;
   gap: 12px;
+  .SortingSelectionPage__heading {
+    flex-grow: 0;
+  }
   .SortingSelectionPage__list {
+    flex-grow: 1;
     width: 240px;
   }
   .SortingSelectionPage__backButton {

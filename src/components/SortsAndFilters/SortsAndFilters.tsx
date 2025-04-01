@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import React, {useEffect, useRef, useState} from "react";
-import {ControlParams} from "../../types/ControlParamsType";
+import {ControlParams, StateSetter} from "../../types/ControlParamsType";
 import cl from "./SortsAndFiltersStyle.module.scss";
 import WindowWithNavigation, {
   WindowWithNavigationProps,
@@ -9,8 +9,11 @@ import WindowWithNavigation, {
 } from "../UI/WindowWithNavigation/WindowWithNavigation";
 import SortsAndFiltersMainPage from "./InnerElements/MainPage/SortsAndFiltersMainPage";
 import SortingSelectionPage from "./InnerElements/sortingSelectionPage/SortingSelectionPage";
-import {FilterPage} from "./InnerElements/filterPagesTypes";
-import DateFilterPage from "./InnerElements/DateFilterPage/DateFilterPage";
+import {
+  RangeFilterPage as RangeFilterPageType,
+  FilterPage,
+} from "./InnerElements/filterPagesTypes";
+import RangeFilterPage from "./InnerElements/DateFilterPage/RangeFilterPage";
 
 export interface SortsAndFiltersState {
   isOpen: boolean;
@@ -116,39 +119,57 @@ const SortsAndFilters = ({
   ];
   Object.keys(state.filters).forEach(key => {
     const filter = state.filters[key];
-    let element: WindowWithNavigationElement;
-    if (filter.type === "date") {
-      element = {
-        name: key,
-        element: (
-          <DateFilterPage
-            goToRef={goToRef}
-            cssClasses={[cl.SortsAndFilters__innerPage]}
-            heading={state.filters[key].heading}
-            controlParams={[
-              filter.fields,
-              newState => {
-                if (typeof newState !== "function") {
-                  setState({
-                    ...state,
-                    filters: {
-                      ...state.filters,
-                      [key]: {
-                        ...state.filters[key],
-                        fields: newState,
-                      },
-                    },
-                  });
-                }
+    const setFilter: StateSetter<RangeFilterPageType["fields"]> = newState => {
+      if (typeof newState !== "function") {
+        setState({
+          ...state,
+          filters: {
+            ...state.filters,
+            [key]: {
+              ...state.filters[key],
+              fields: newState,
+            },
+          },
+        });
+      } else {
+        setState(prevState => {
+          return {
+            ...prevState,
+            filters: {
+              ...prevState.filters,
+              [key]: {
+                ...prevState.filters[key],
+                fields: newState(prevState.filters[key].fields),
               },
-            ]}
-          />
-        ),
-      };
+            },
+          };
+        });
+      }
+    };
+    let element: WindowWithNavigationElement["element"];
+    if (filter.type === "date") {
+      element = (
+        <RangeFilterPage
+          goToRef={goToRef}
+          cssClasses={[cl.SortsAndFilters__innerPage]}
+          heading={state.filters[key].heading}
+          controlParams={[filter.fields, setFilter]}
+          type="date"
+        />
+      );
     } else {
-      element = {name: "", element: <div></div>};
+      //if (filter.type === "number")
+      element = (
+        <RangeFilterPage
+          type="number"
+          cssClasses={[cl.SortsAndFilters__innerPage]}
+          controlParams={[filter.fields, setFilter]}
+          goToRef={goToRef}
+          heading={filter.heading}
+        />
+      );
     }
-    elements.push(element);
+    elements.push({name: key, element: element});
   });
   const [windowWithNavigationState, setWindowWithNavigationState] =
     useState<WindowWithNavigationState>({
