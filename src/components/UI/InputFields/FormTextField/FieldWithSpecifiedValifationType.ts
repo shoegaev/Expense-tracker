@@ -1,11 +1,14 @@
 import {ControlParams} from "../../../../types/ControlParamsType";
-import {StateWithValidation} from "../../../../types/validationTypes";
+import {
+  StateWithValidation,
+  ValidationRequirements,
+} from "../../../../types/validationTypes";
 
 export interface FieldWithSpecifiedValifationProps {
+  controlParams: ControlParams<StateWithValidation<string>>;
   cssClasses?: string[];
   fieldCssClasses?: string[];
-  controlParams: ControlParams<StateWithValidation<string>>;
   placeholder?: string;
   labelText?: string;
-  isRequired?: boolean;
+  validationRequirements?: ValidationRequirements<string>;
 }

@@ -142,6 +142,15 @@ const AddExpenseWindow = ({
               setFieldValueByKey("amount", newValue);
             },
           ]}
+          validationRequirements={{
+            validations: [
+              {
+                callbak: value => {
+                  return !value.match(/^0\.{0,1}0{0,}$/);
+                },
+              },
+            ],
+          }}
         />
         <DateField
           placeholder="MM/DD/YYYY"

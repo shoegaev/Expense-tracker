@@ -6,10 +6,13 @@ import StepperButtons from "../../../StepperButtons/StepperButtons";
 import {ValidationRequirements} from "../../../../../types/validationTypes";
 import {validateValue} from "../../../../../utils/validateData";
 
-const NumberField = ({...props}: FieldWithSpecifiedValifationProps) => {
+const NumberField = ({
+  validationRequirements,
+  ...props
+}: FieldWithSpecifiedValifationProps) => {
   const [state, setState] = props.controlParams;
   const ValidationRequirements: ValidationRequirements<string> = {
-    isRequired: true,
+    isRequired: validationRequirements?.isRequired ?? true,
     validations: [
       {
         message: "Invalid symbols",
@@ -45,11 +48,7 @@ const NumberField = ({...props}: FieldWithSpecifiedValifationProps) => {
           }
         },
       },
-      {
-        callbak: value => {
-          return !value.match(/^0\.{0,1}0{0,}$/);
-        },
-      },
+      ...(validationRequirements?.validations || []),
     ],
   };
   return (

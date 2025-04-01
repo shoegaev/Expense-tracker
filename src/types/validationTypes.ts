@@ -9,6 +9,6 @@ export type StateWithValidation<T> = {
 };
 
 export type ValidationRequirements<T> = {
-  isRequired: boolean;
-  validations: {message?: string; callbak: (value: T) => boolean}[];
+  isRequired?: boolean;
+  validations?: {message?: string; callbak: (value: T) => boolean}[];
 };
