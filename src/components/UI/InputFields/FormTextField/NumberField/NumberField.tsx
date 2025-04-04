@@ -59,6 +59,14 @@ const NumberField = ({
         right: [
           <StepperButtons
             key="button"
+            disabled={
+              state.validation.errMessage
+                ? {
+                    plus: true,
+                    minus: true,
+                  }
+                : undefined
+            }
             controlParams={[
               state.value,
               valueOrHandler => {

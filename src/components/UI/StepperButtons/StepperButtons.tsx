@@ -63,7 +63,10 @@ const StepperButtons = ({
   return (
     <div className={cl.StepperButtons}>
       <div
-        className={cl.StepperButtons__button}
+        className={[
+          cl.StepperButtons__button,
+          disabled?.minus ? cl.StepperButtons__button_disabled : "",
+        ].join(" ")}
         onPointerDown={() => {
           minusButtonOnClick();
           startRepeat(minusButtonOnClick);
@@ -73,7 +76,10 @@ const StepperButtons = ({
         -
       </div>
       <div
-        className={cl.StepperButtons__button}
+        className={[
+          cl.StepperButtons__button,
+          disabled?.plus ? cl.StepperButtons__button_disabled : "",
+        ].join(" ")}
         onPointerDown={() => {
           plusButtonOnClick();
           startRepeat(plusButtonOnClick);
