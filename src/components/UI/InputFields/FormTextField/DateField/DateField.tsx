@@ -13,6 +13,7 @@ import {ValidationRequirements} from "../../../../../types/validationTypes";
 const DateField = ({
   controlParams,
   validationRequirements,
+  changeValueOnInputHandler,
   ...props
 }: FieldWithSpecifiedValifationProps) => {
   const [state, setState] = controlParams;
@@ -46,7 +47,20 @@ const DateField = ({
     <FormTextField
       {...props}
       controlParams={controlParams}
-      symbolsRestrictions={/[0-9/]/}
+      changeValueOnInputHandler={(newValue, prevValue, data) => {
+        let result: string;
+        if (
+          (prevValue.split("/").length >= 3 && data === "/") ||
+          (data?.length === 1 && !data.match(/[0-9/]/))
+        ) {
+          result = prevValue;
+        } else {
+          result = newValue;
+        }
+        return changeValueOnInputHandler
+          ? changeValueOnInputHandler(result, prevValue, data)
+          : result;
+      }}
       innerElements={{
         right: [
           <DatePicker

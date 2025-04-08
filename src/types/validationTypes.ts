@@ -12,3 +12,9 @@ export type ValidationRequirements<T> = {
   isRequired?: boolean;
   validations?: {message?: string; callbak: (value: T) => boolean}[];
 };
+
+export type changeValueOnInputHandler<T> = (
+  newValue: T,
+  prevValue: T,
+  data?: T,
+) => T;

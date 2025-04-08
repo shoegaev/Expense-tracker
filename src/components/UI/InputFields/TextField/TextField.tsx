@@ -1,14 +1,14 @@
 /* eslint-disable max-lines-per-function */
-import React, {FormEventHandler} from "react";
+import React from "react";
 import {ControlParams} from "../../../../types/ControlParamsType";
+import {changeValueOnInputHandler} from "../../../../types/validationTypes";
 import cl from "./TextField.module.scss";
 
 export interface TextFieldProps {
   controlParams: ControlParams<string>;
   cssClasses?: string[];
   inputMode?: "text" | "decimal" | "numeric";
-  symbolsRestrictions?: RegExp;
-  onInput?: FormEventHandler<HTMLTextAreaElement>;
+  changeValueOnInputHandler?: changeValueOnInputHandler<string>;
   lineType?: "multi-line" | "single-line";
   innerElements?: {
     left?: React.JSX.Element[];
@@ -22,8 +22,7 @@ export interface TextFieldProps {
 const TextField = ({
   cssClasses,
   controlParams,
-  symbolsRestrictions,
-  onInput,
+  changeValueOnInputHandler,
   lineType = "single-line",
   placeholder,
   disabled,
@@ -50,20 +49,13 @@ const TextField = ({
         className={cl.TextField__textArea}
         value={value}
         onInput={e => {
-          const nativeE = e.nativeEvent;
-          if (onInput) onInput(e);
-          const currValue = e.currentTarget.value;
-
-          if (
-            !symbolsRestrictions ||
-            (nativeE instanceof InputEvent &&
-              (nativeE.data?.match(symbolsRestrictions) ||
-                nativeE.data === null))
-          ) {
-            setValue(currValue);
-          } else {
-            return;
-          }
+          const newValue = e.currentTarget.value;
+          const data = (e.nativeEvent as InputEvent).data ?? undefined;
+          setValue(
+            changeValueOnInputHandler
+              ? changeValueOnInputHandler(newValue, value, data)
+              : newValue,
+          );
         }}
         {...props}
       />

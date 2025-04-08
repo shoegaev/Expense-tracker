@@ -8,6 +8,7 @@ import {validateValue} from "../../../../../utils/validateData";
 
 const NumberField = ({
   validationRequirements,
+  changeValueOnInputHandler,
   ...props
 }: FieldWithSpecifiedValifationProps) => {
   const [state, setState] = props.controlParams;
@@ -54,7 +55,31 @@ const NumberField = ({
   return (
     <FormTextField
       {...props}
-      symbolsRestrictions={/[0-9.]/}
+      changeValueOnInputHandler={(newValue, prevValue, data) => {
+        const newValueSymbols = newValue.split("");
+        let dotIndex: null | number = null;
+        let result = "";
+        for (let i = 0; i < newValueSymbols.length; i++) {
+          const symbol = newValueSymbols[i];
+          if (symbol.match(/[0-9]/)) {
+            result += symbol;
+          } else if (symbol.match(/[.,]/) && !dotIndex) {
+            result += ".";
+            dotIndex = i;
+          } else {
+            break;
+          }
+        }
+        if (dotIndex === 0 && result.length > 1) {
+          result = "0" + result;
+        }
+        if (dotIndex && result.length > dotIndex + 3) {
+          result = result.slice(0, dotIndex + 3);
+        }
+        return changeValueOnInputHandler
+          ? changeValueOnInputHandler(result, prevValue, data)
+          : result;
+      }}
       innerElements={{
         right: [
           <StepperButtons
