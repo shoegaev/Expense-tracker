@@ -5,7 +5,7 @@ import NumberField from "../UI/InputFields/FormTextField/NumberField/NumberField
 import NameField from "./fields/NameField/NameField";
 import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
-import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
+import ArrowIcon from "../../assets/icons/Arrow.svg?react";
 import DescribtionField from "./fields/DescribtionField/DescribtionField";
 import DateField from "../UI/InputFields/FormTextField/DateField/DateField";
 

@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
-import React, {useState} from "react";
+import { useState } from "react";
 import classes from "./ExpenseListStyle.module.scss";
-import {AppData, Expense} from "../../types/appDataType";
+import { AppData, Expense } from "../../types/appDataType";
 import ExpenseLine from "./ExpenseLine/EpxenseLine";
 import {
   ExpenseListSortsAndFilters,
@@ -50,12 +50,12 @@ const SortsAndFiltersDeafaultState: SortsAndFiltersState = {
 
 const ExpenseList = ({
   appDataState,
-  options = {sorting: ExpenseListSorting.dateDescending},
+  options = { sorting: ExpenseListSorting.dateDescending },
 }: ExpenseListProps) => {
   const [state, setState] = useState<SortsAndFiltersState>(
     SortsAndFiltersDeafaultState,
   );
-  const {searchLine, period, category, sorting} = options;
+  const { searchLine, period, category, sorting } = options;
   //
   const [searchLineValue, setSearchLineValue] = useState("");
   //
@@ -71,20 +71,20 @@ const ExpenseList = ({
   }
   if (searchLine) {
     const reg = new RegExp(searchLine, "i");
-    expenseIds.filter(id => appDataState.expenses[id].name.match(reg));
+    expenseIds.filter((id) => appDataState.expenses[id].name.match(reg));
   }
   if (category) {
     expenseIds.filter(
-      id => appDataState.expenses[id].categoryName === options.category,
+      (id) => appDataState.expenses[id].categoryName === options.category,
     );
   }
   if (period) {
-    expenseIds.filter(id => {
+    expenseIds.filter((id) => {
       const date = appDataState.expenses[id].date;
       return +period[0] < Number(date) && Number(date) < +period[1];
     });
   }
-  const ExpenseLines = expenseIds.map(id => {
+  const ExpenseLines = expenseIds.map((id) => {
     return (
       <ExpenseLine key={id} params={appDataState.expenses[id]}></ExpenseLine>
     );
@@ -95,8 +95,8 @@ const ExpenseList = ({
       <ExpenseListHeader
         searchLineParams={[searchLineValue, setSearchLineValue]}
         sortsAndFiltersButtonCallback={() => {
-          setState(prev => {
-            return {...prev, isOpen: !prev.isOpen};
+          setState((prev) => {
+            return { ...prev, isOpen: !prev.isOpen };
           });
         }}
       />

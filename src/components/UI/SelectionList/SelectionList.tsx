@@ -1,4 +1,3 @@
-import React from "react";
 import cl from "./SelectionListStyle.module.scss";
 import {ControlParams} from "../../../types/ControlParamsType";
 

@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import React, {useState} from "react";
+import {useState} from "react";
 import {ControlParams} from "../../../../types/ControlParamsType";
 import DateField from "../../../UI/InputFields/FormTextField/DateField/DateField";
 import cl from "./RangeFilterPageStyle.module.scss";

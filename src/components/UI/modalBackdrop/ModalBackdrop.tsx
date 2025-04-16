@@ -1,4 +1,3 @@
-import React from "react";
 import cl from "./ModalBackdropStyle.module.scss";
 import {ControlParams} from "../../../types/ControlParamsType";
 

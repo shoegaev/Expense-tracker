@@ -1,5 +1,4 @@
 /* eslint-disable max-lines-per-function */
-import React from "react";
 import FormTextField from "../FormTextField";
 import {FieldWithSpecifiedValifationProps} from "../FieldWithSpecifiedValifationType";
 import StepperButtons from "../../../StepperButtons/StepperButtons";

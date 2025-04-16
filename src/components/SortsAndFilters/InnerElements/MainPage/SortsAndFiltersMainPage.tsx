@@ -1,4 +1,3 @@
-import React from "react";
 import cl from "./SortsAndFiltersMainPageStyles.module.scss";
 import MainButton from "../../../UI/MainButton/MainButton";
 import {WindowWithNavigationProps} from "../../../UI/WindowWithNavigation/WindowWithNavigation";
@@ -43,7 +42,7 @@ const SortsAndFiltersMainPage = ({
         />
       </div>
       <FiltersSection
-        cssClasses={cl.SortsAndFiltersMainPage__FiltersSection}
+        cssClasses={[cl.SortsAndFiltersMainPage__FiltersSection]}
         goToRef={goToRef}
         controlParams={controlParams}
       />

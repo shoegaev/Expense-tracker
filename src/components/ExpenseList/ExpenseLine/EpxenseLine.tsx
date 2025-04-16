@@ -1,7 +1,7 @@
 /* eslint-disable max-lines-per-function */
-import React, {useRef} from "react";
-import {Expense} from "../../../types/appDataType";
-import {expand, minimize} from "./animations/expenseLineAnimations";
+import { useRef } from "react";
+import { Expense } from "../../../types/appDataType";
+import { expand, minimize } from "./animations/expenseLineAnimations";
 import classes from "./ExpenseLineStyle.module.scss";
 import getStringDate from "../../../utils/getStringDate";
 
@@ -9,7 +9,7 @@ type ExpenseProps = {
   params: Expense;
 };
 
-const ExpenseLine = ({params}: ExpenseProps) => {
+const ExpenseLine = ({ params }: ExpenseProps) => {
   const date = getStringDate(new Date(+params.date));
   const lineRef = useRef<null | HTMLDivElement>(null);
   const lineContentRef = useRef<null | HTMLDivElement>(null);
@@ -32,7 +32,8 @@ const ExpenseLine = ({params}: ExpenseProps) => {
           <div className={classes.ExpenseLine_color}></div>
           <span className={classes.ExpenseLine_name}>{params.name}</span>
           <span
-            className={classes.ExpenseLine_amount}>{`${params.amount} $`}</span>
+            className={classes.ExpenseLine_amount}
+          >{`${params.amount} $`}</span>
           <span className={classes.ExpenseLine_date}>
             {`${date.slice(0, 5)} ${date.slice(11, -3)}`}
           </span>
@@ -61,7 +62,8 @@ const ExpenseLine = ({params}: ExpenseProps) => {
       </div>
       <div
         className={classes.ExpenseLine_sizeButton}
-        onClick={onSizeButtonClick}></div>
+        onClick={onSizeButtonClick}
+      ></div>
     </div>
   );
 };

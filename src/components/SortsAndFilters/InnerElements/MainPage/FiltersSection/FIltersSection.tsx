@@ -1,5 +1,4 @@
 /* eslint-disable max-lines-per-function */
-import React from "react";
 import cl from "./FiltersSectionStyle.module.scss";
 import {WindowWithNavigationProps} from "../../../../UI/WindowWithNavigation/WindowWithNavigation";
 import {ControlParams} from "../../../../../types/ControlParamsType";

@@ -1,4 +1,3 @@
-import React from "react";
 import cl from "./SortingSelectionPageStyle.module.scss";
 import {WindowWithNavigationProps} from "../../../UI/WindowWithNavigation/WindowWithNavigation";
 import SelectionList, {

@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import React, {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {ControlParams, StateSetter} from "../../types/ControlParamsType";
 import cl from "./SortsAndFiltersStyle.module.scss";
 import WindowWithNavigation, {

@@ -1,9 +1,8 @@
 /* eslint-disable max-lines-per-function */
-import React from "react";
 import FormTextField from "../FormTextField";
 import {FieldWithSpecifiedValifationProps} from "../FieldWithSpecifiedValifationType";
 import getStringDate from "../../../../../utils/getStringDate";
-import {ReactComponent as CalendarIcon} from "../../../..//../assets/icons/CalendarIcon.svg";
+import CalendarIcon from "../../../..//../assets/icons/CalendarIcon.svg?react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import cl from "./DateFieldStyle.module.scss";

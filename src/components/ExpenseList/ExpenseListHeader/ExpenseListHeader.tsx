@@ -1,7 +1,6 @@
-import React from "react";
 import classes from "./ExpenseListHeaderStyle.module.scss";
 import SearchLine from "../../UI/InputFields/SearchLine/SearchLine";
-import {ReactComponent as SortsAndFiltersIcons} from "../../../assets/icons/SortsAndFiltersIcon.svg";
+import SortsAndFiltersIcons from "../../../assets/icons/SortsAndFiltersIcon.svg?react";
 import {ControlParams} from "../../../types/ControlParamsType";
 
 interface ExpenseListHeaderProps {

@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import LabeledTextField, {
   LabeledTextFieldProps,
 } from "../LabeledTextField/LabeledTextField";
 import TextField from "../TextField/TextField";
-import {ReactComponent as ErrorIcon} from "../../../../assets/icons/ErrorIcon.svg";
+import ErrorIcon from "../../../../assets/icons/ErrorIcon.svg?react";
 import {ControlParams} from "../../../../types/ControlParamsType";
 import cl from "./FormTextFieldStyle.module.scss";
 import {

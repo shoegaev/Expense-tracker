@@ -1,4 +1,3 @@
-import React from "react";
 import FormTextField from "../../../UI/InputFields/FormTextField/FormTextField";
 import {AddExpenseWindowFieldProps} from "../AddExpenseWindowFieldType";
 
