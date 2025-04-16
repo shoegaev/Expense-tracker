@@ -1,0 +1,18 @@
+@import "../../variables.scss";
+.SortsAndFilters {
+  background-color: $color-interfaceBright;
+  border: 2px solid $color-interfaceDark;
+  border-left: 2px solid $color-interfaceDark;
+  border-right: 2px solid $color-interfaceDark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .SortsAndFilters__content {
+    width: calc(100%);
+    height: calc(100%);
+    .SortsAndFilters__innerPage {
+      padding: 24px 12px;
+      height: 100%;
+    }
+  }
+}

@@ -36,7 +36,7 @@
     font-weight: normal;
     flex-shrink: 0;
   }
-  .AddExpenseWindow__fields {
+  .AddExpenseWindow__formFields {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -45,36 +45,39 @@
     padding: 16px 6px 0 6px;
     overflow-y: auto;
     margin: 12px 0 0 0;
-    .AddExpenseWindow__field {
+    .AddExpenseWindow__formField {
       width: 380px;
       height: 100%;
+      .AddExpenseWindow__field {
+        background-color: $color-interfaceBright;
+      }
     }
-    .AddExpenseWindow__field:nth-child(even) {
+    .AddExpenseWindow__formField:nth-child(even) {
       justify-self: flex-end;
     }
-    .AddExpenseWindow__field_multiLine {
+    .AddExpenseWindow__formField.AddExpenseWindow__formField_multiLine {
       width: 100%;
       height: 100%;
       grid-area: 3 / 1 / 6 / 3;
     }
     @media (max-width: 810px) {
-      .AddExpenseWindow__field {
+      .AddExpenseWindow__formField {
         width: 340px;
       }
     }
     @media (max-width: 725px) {
-      .AddExpenseWindow__field {
+      .AddExpenseWindow__formField {
         width: 310px;
       }
     }
   }
-  .AddExpenseWindow__fields::-webkit-scrollbar {
+  .AddExpenseWindow__formFields::-webkit-scrollbar {
     @include scrollbar;
   }
-  .AddExpenseWindow__fields::-webkit-scrollbar-track {
+  .AddExpenseWindow__formFields::-webkit-scrollbar-track {
     @include scrollbarTrack;
   }
-  .AddExpenseWindow__fields::-webkit-scrollbar-thumb {
+  .AddExpenseWindow__formFields::-webkit-scrollbar-thumb {
     @include scrollbarThumb;
   }
   .AddExpenseWindow__warningText {
@@ -88,6 +91,8 @@
   }
   .AddExpenseWindow__submitButton {
     flex-shrink: 0;
+    width: 110px;
+    height: 40px;
   }
 }
 @media (max-width: 660px) {

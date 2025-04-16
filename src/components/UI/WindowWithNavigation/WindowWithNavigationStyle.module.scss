@@ -1,0 +1,23 @@
+.WindowWithNavigation {
+  overflow: hidden;
+  position: relative;
+  .WindowWithNavigation__innerElement {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateX(100%);
+    opacity: 0;
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+  .WindowWithNavigation__innerElement_open {
+    transform: none;
+    opacity: 1;
+  }
+  .WindowWithNavigation__innerElement_cashed {
+    transform: translateX(-100%);
+  }
+}

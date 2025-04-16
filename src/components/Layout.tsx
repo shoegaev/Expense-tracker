@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import BurgerMenuButton from "./UI/buttons/BurgerMenuButton/BurgerMenuButton";
 import ModalBackdrop from "./UI/modalBackdrop/ModalBackdrop";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import classes from "./LayoutStyle.module.scss";
 import Header from "./Header/Header";
 

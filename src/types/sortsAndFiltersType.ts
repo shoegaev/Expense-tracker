@@ -5,9 +5,9 @@ export enum ExpenseListSorting {
   amountDescending = "Date (large first)",
 }
 
-export interface ExpenseListOptions {
+export interface ExpenseListSortsAndFilters {
   searchLine?: string;
-  period?: [number, number];
+  period?: [string, string];
   category?: string;
   sorting: ExpenseListSorting;
 }

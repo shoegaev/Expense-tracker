@@ -1,0 +1,53 @@
+@import "../../../variables.scss";
+
+.SelectionList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0;
+  overflow: auto;
+  .SelectionList__option {
+    width: calc(100%);
+    height: 52px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 6px;
+    flex-shrink: 0;
+    transition: scale 0.2s ease;
+    .SelectionList__optionText {
+      width: 100%;
+      height: 100%;
+      background-color: $color-mainBackground;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .SelectionList__option_selected {
+    .SelectionList__optionText {
+      background-color: $color-interfaceDark;
+      color: $color-headerBackground;
+    }
+  }
+}
+@media (hover: hover) {
+  *:has(.SelectionList__option):has(.SelectionList__option:hover)
+    > .SelectionList__option:not(:hover) {
+    scale: 0.9;
+  }
+}
+.SelectionList::-webkit-scrollbar {
+  @include scrollbar;
+}
+.SelectionList::-webkit-scrollbar-thumb {
+  @include scrollbarThumb;
+}
+.SelectionList::-webkit-scrollbar-track {
+  margin-top: 10px;
+  @include scrollbarTrack;
+  margin-bottom: 10px;
+}

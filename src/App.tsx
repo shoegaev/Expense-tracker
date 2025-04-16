@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import "./App.scss";
 import Layout from "./components/Layout";
 import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";

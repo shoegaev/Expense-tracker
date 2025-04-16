@@ -1,0 +1,21 @@
+.SortsAndFiltersMainPage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .SortsAndFiltersMainPage__sorting {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .SortsAndFiltersMainPage__sortingTitle {
+      color: black;
+    }
+    .SortsAndFiltersMainPage__sortingButton {
+      width: 240px;
+      height: 40px;
+      align-self: center;
+    }
+  }
+  .SortsAndFiltersMainPage__FiltersSection {
+
+  }
+}

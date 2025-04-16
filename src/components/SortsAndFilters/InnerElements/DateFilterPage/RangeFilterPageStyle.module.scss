@@ -1,0 +1,50 @@
+@import "../../../../variables.scss";
+.RangeFilterPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 36px;
+  .RangeFilterPage__backButton {
+    cursor: pointer;
+    position: absolute;
+    top: 24px;
+    left: 12px;
+  }
+  .RangeFilterPage__heading {
+  }
+  .RangeFilterPage__fields {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .RangeFilterPage__dateField {
+      width: 100%;
+      .RangeFilterPage__field {
+        height: 40px;
+      }
+    }
+  }
+  .RangeFilterPage__buttonContainer {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 6px;
+    align-items: center;
+    .RangeFilterPage__warningText {
+      color: $color-interfaceDark;
+      font-size: $fontSizeUnderline;
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+    .RangeFilterPage__warningText_visible {
+      opacity: 1;
+    }
+    .RangeFilterPage__submitButton {
+      width: 90px;
+      height: 40px;
+    }
+  }
+}

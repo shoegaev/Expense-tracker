@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./ToolbarStyle.module.scss";
 
 const Toolbar = () => {

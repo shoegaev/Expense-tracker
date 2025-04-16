@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
-import React, {useRef} from "react";
-import {ControlParams} from "../../../types/ControlParamsType";
+import { useRef } from "react";
+import { ControlParams } from "../../../types/ControlParamsType";
 import cl from "./StepperButtonsStyle.module.scss";
 
 interface StepperButtonsProps {
@@ -16,12 +16,12 @@ interface StepperButtonsProps {
 const StepperButtons = ({
   controlParams,
   decimalPlaces = 2,
-  disabled = {minus: false, plus: false},
+  disabled = { minus: false, plus: false },
   step = 0.1,
 }: StepperButtonsProps) => {
   const [, setValue] = controlParams;
-  const startRepeatingIdRef = useRef<null | NodeJS.Timeout>(null);
-  const repeatingIdRef = useRef<null | NodeJS.Timeout>(null);
+  const startRepeatingIdRef = useRef<null | number>(null);
+  const repeatingIdRef = useRef<null | number>(null);
   const clearTimers = (): void => {
     if (startRepeatingIdRef.current) {
       clearInterval(startRepeatingIdRef.current);
@@ -33,7 +33,7 @@ const StepperButtons = ({
     }
   };
   const minusButtonOnClick = () => {
-    setValue(v => {
+    setValue((v) => {
       if (disabled.minus) {
         clearTimers();
         return v;
@@ -45,7 +45,7 @@ const StepperButtons = ({
     });
   };
   const plusButtonOnClick = () => {
-    setValue(v => {
+    setValue((v) => {
       if (disabled.plus) {
         clearTimers();
         return v;
@@ -63,23 +63,31 @@ const StepperButtons = ({
   return (
     <div className={cl.StepperButtons}>
       <div
-        className={cl.StepperButtons__button}
+        className={[
+          cl.StepperButtons__button,
+          disabled?.minus ? cl.StepperButtons__button_disabled : "",
+        ].join(" ")}
         onPointerDown={() => {
           minusButtonOnClick();
           startRepeat(minusButtonOnClick);
         }}
         onPointerUp={clearTimers}
-        onPointerLeave={clearTimers}>
+        onPointerLeave={clearTimers}
+      >
         -
       </div>
       <div
-        className={cl.StepperButtons__button}
+        className={[
+          cl.StepperButtons__button,
+          disabled?.plus ? cl.StepperButtons__button_disabled : "",
+        ].join(" ")}
         onPointerDown={() => {
           plusButtonOnClick();
           startRepeat(plusButtonOnClick);
         }}
         onPointerUp={clearTimers}
-        onPointerLeave={clearTimers}>
+        onPointerLeave={clearTimers}
+      >
         +
       </div>
     </div>

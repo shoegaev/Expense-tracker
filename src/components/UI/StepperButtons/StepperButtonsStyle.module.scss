@@ -13,6 +13,7 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    transition: opacity 0.2s ease;
   }
   .StepperButtons__button:nth-child(1) {
     border-top-left-radius: 50%;
@@ -25,6 +26,18 @@
   @media (hover: hover) {
     .StepperButtons__button:hover {
       scale: 1.05;
+    }
+  }
+}
+
+.StepperButtons {
+  .StepperButtons__button_disabled {
+    opacity: 0.5;
+    cursor: auto;
+  }
+  @media (hover: hover) {
+    .StepperButtons__button_disabled:hover {
+      scale: 1;
     }
   }
 }

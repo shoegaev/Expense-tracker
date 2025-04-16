@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {AppData, Expense} from "../types/appDataType";
+import { useState } from "react";
+import { AppData, Expense } from "../types/appDataType";
 import ExpenseList from "../components/ExpenseList/ExpenseList";
 import pagesCl from "./PagesStyles.module.scss";
 import cl from "./HistoryPagesStyle.module.scss";
@@ -24,16 +24,18 @@ const HistoryPage = (props: HistoryPageProps) => {
         pagesCl.Page,
         cl.HistoryPage,
         addWindowState.isOpen ? cl.HistoryPage_addingExpense : "",
-      ].join(" ")}>
-
+      ].join(" ")}
+    >
       <div className={cl.HistoryPage__mainContent}>
         <ExpenseList {...props}></ExpenseList>
         <div className={cl.HistoryPage__buttons}>
           <MainButton
+            className={cl.HistoryPage__addButton}
             text="Add expense"
             callback={() => {
-              setAddWindowState({...addWindowState, isOpen: true});
-            }}></MainButton>
+              setAddWindowState({ ...addWindowState, isOpen: true });
+            }}
+          ></MainButton>
         </div>
       </div>
 
@@ -41,7 +43,8 @@ const HistoryPage = (props: HistoryPageProps) => {
         className={cl.HistoryPage__addExpenseWindow}
         AddExpenseWindowState={addWindowState}
         setAddExpenseWindowState={setAddWindowState}
-        addExpense={props.addExpense}></AddExpenseWindow>
+        addExpense={props.addExpense}
+      ></AddExpenseWindow>
     </div>
   );
 };

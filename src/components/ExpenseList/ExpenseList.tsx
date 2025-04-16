@@ -1,24 +1,61 @@
-import React, {useState} from "react";
+/* eslint-disable max-lines-per-function */
+import { useState } from "react";
 import classes from "./ExpenseListStyle.module.scss";
-import {AppData, Expense} from "../../types/appDataType";
+import { AppData, Expense } from "../../types/appDataType";
 import ExpenseLine from "./ExpenseLine/EpxenseLine";
 import {
-  ExpenseListOptions,
+  ExpenseListSortsAndFilters,
   ExpenseListSorting,
 } from "../../types/sortsAndFiltersType";
 import ExpenseListHeader from "./ExpenseListHeader/ExpenseListHeader";
+import SortsAndFilters, {
+  SortsAndFiltersState,
+} from "../SortsAndFilters/SortsAndFilters";
 
 type ExpenseListProps = {
   appDataState: AppData;
-  options?: ExpenseListOptions;
+  options?: ExpenseListSortsAndFilters;
   addExpense: (params: Expense) => true | "Invalid Date" | "Invalid category";
+};
+
+const SortsAndFiltersDeafaultState: SortsAndFiltersState = {
+  isOpen: false,
+  sorting: {
+    options: Object.values(ExpenseListSorting),
+    selected: ExpenseListSorting.dateDescending,
+  },
+  filters: {
+    period: {
+      type: "date",
+      fields: {
+        from: "",
+        to: "",
+      },
+      title: "Period",
+      heading: "Period filter",
+      textWhenNotSelected: "All",
+    },
+    amount: {
+      type: "number",
+      fields: {
+        from: "",
+        to: "",
+      },
+      title: "Amount",
+      heading: "Amount filter",
+      textWhenNotSelected: "All",
+    },
+  },
 };
 
 const ExpenseList = ({
   appDataState,
-  options = {sorting: ExpenseListSorting.dateDescending},
+  options = { sorting: ExpenseListSorting.dateDescending },
 }: ExpenseListProps) => {
-  const {searchLine, period, category, sorting} = options;
+  const [state, setState] = useState<SortsAndFiltersState>(
+    SortsAndFiltersDeafaultState,
+  );
+  const { searchLine, period, category, sorting } = options;
   //
   const [searchLineValue, setSearchLineValue] = useState("");
   //
@@ -34,27 +71,39 @@ const ExpenseList = ({
   }
   if (searchLine) {
     const reg = new RegExp(searchLine, "i");
-    expenseIds.filter(id => appDataState.expenses[id].name.match(reg));
+    expenseIds.filter((id) => appDataState.expenses[id].name.match(reg));
   }
   if (category) {
     expenseIds.filter(
-      id => appDataState.expenses[id].categoryName === options.category,
+      (id) => appDataState.expenses[id].categoryName === options.category,
     );
   }
   if (period) {
-    expenseIds.filter(id => {
+    expenseIds.filter((id) => {
       const date = appDataState.expenses[id].date;
-      return period[0] < Number(date) && Number(date) < period[1];
+      return +period[0] < Number(date) && Number(date) < +period[1];
     });
   }
-  const ExpenseLines = expenseIds.map(id => {
-    return <ExpenseLine key={id} params={appDataState.expenses[id]}></ExpenseLine>;
+  const ExpenseLines = expenseIds.map((id) => {
+    return (
+      <ExpenseLine key={id} params={appDataState.expenses[id]}></ExpenseLine>
+    );
   });
 
   return (
     <div className={classes.ExpenseList}>
       <ExpenseListHeader
         searchLineParams={[searchLineValue, setSearchLineValue]}
+        sortsAndFiltersButtonCallback={() => {
+          setState((prev) => {
+            return { ...prev, isOpen: !prev.isOpen };
+          });
+        }}
+      />
+      <SortsAndFilters
+        controlParams={[state, setState]}
+        cssClasses={[classes.ExpenseList__sortsAndFilters]}
+        onOpenCssClasses={[classes.ExpenseList__sortsAndFilters_open]}
       />
       <div className={classes.ExpenseList__list}>
         <hr className={classes.ExpenseList__listBorder} />

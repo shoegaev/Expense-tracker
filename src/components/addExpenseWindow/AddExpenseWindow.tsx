@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {Expense} from "../../types/appDataType";
-import FormTextField from "../UI/FormTextField/FormTextField";
-import AmountField from "./fields/AmountField/AmountField";
+import FormTextField from "../UI/InputFields/FormTextField/FormTextField";
+import NumberField from "../UI/InputFields/FormTextField/NumberField/NumberField";
 import NameField from "./fields/NameField/NameField";
 import classes from "./AddExpenseWindowStyle.module.scss";
 import MainButton from "../UI/MainButton/MainButton";
-import {ReactComponent as ArrowIcon} from "../../assets/icons/Arrow.svg";
+import ArrowIcon from "../../assets/icons/Arrow.svg?react";
 import DescribtionField from "./fields/DescribtionField/DescribtionField";
-import DateField from "./fields/DateField/DateField";
+import DateField from "../UI/InputFields/FormTextField/DateField/DateField";
 
 export type AddExpenseWindowState = {
   fields: {
@@ -51,7 +51,6 @@ const AddExpenseWindow = ({
   addExpense,
   setAddExpenseWindowState: setState,
 }: AddExpenseWindowProps) => {
-
   const setFieldValueByKey = <T extends keyof AddExpenseWindowState["fields"]>(
     fieldName: T,
     valueOrHandler:
@@ -107,9 +106,10 @@ const AddExpenseWindow = ({
         onClick={closeAndClearWindow}>
         <ArrowIcon className={classes.AddExpenseWindow__backButtonIcon} />
       </div>
-      <div className={classes.AddExpenseWindow__fields}>
+      <div className={classes.AddExpenseWindow__formFields}>
         <NameField
-          cssClasses={[classes.AddExpenseWindow__field]}
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.name,
             newValue => {
@@ -118,7 +118,8 @@ const AddExpenseWindow = ({
           ]}
         />
         <FormTextField
-          cssClasses={[classes.AddExpenseWindow__field]}
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.categoryName,
             newValue => {
@@ -130,17 +131,32 @@ const AddExpenseWindow = ({
           labelText="Category:"
           disabled={true}
         />
-        <AmountField
-          cssClasses={[classes.AddExpenseWindow__field]}
+        <NumberField
+          placeholder="Amount"
+          labelText="Amount:"
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.amount,
             newValue => {
               setFieldValueByKey("amount", newValue);
             },
           ]}
+          validationRequirements={{
+            validations: [
+              {
+                callbak: value => {
+                  return !value.match(/^0\.{0,1}0{0,}$/);
+                },
+              },
+            ],
+          }}
         />
         <DateField
-          cssClasses={[classes.AddExpenseWindow__field]}
+          placeholder="MM/DD/YYYY"
+          labelText="Date"
+          cssClasses={[classes.AddExpenseWindow__formField]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.date,
             newValue => {
@@ -149,7 +165,11 @@ const AddExpenseWindow = ({
           ]}
         />
         <DescribtionField
-          cssClasses={[classes.AddExpenseWindow__field_multiLine]}
+          cssClasses={[
+            classes.AddExpenseWindow__formField,
+            classes.AddExpenseWindow__formField_multiLine,
+          ]}
+          fieldCssClasses={[classes.AddExpenseWindow__field]}
           controlParams={[
             state.fields.descriprion,
             newValue => {

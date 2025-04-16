@@ -1,6 +1,7 @@
 @import "../../../variables.scss";
+@import "../ExpenseListStyle.module.scss";
 .ExpenseListHeader {
-  height: 40px;
+  height: $headerHeigth;
   width: 100%;
   display: flex;
   gap: 10px;
@@ -26,6 +27,7 @@
     }
   }
   .ExpenseListHeader__searchLine {
-    width: 300px;
+    width: 325px;
+    background-color: $color-interfaceBright;
   }
 }

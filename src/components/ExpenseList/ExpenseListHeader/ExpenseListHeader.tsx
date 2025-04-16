@@ -1,17 +1,25 @@
-import React from "react";
 import classes from "./ExpenseListHeaderStyle.module.scss";
-import SearchLine from "../../UI/searchLine/SearchLine";
-import {ReactComponent as SortsAndFiltersIcons} from "../../../assets/icons/SortsAndFiltersIcon.svg";
+import SearchLine from "../../UI/InputFields/SearchLine/SearchLine";
+import SortsAndFiltersIcons from "../../../assets/icons/SortsAndFiltersIcon.svg?react";
 import {ControlParams} from "../../../types/ControlParamsType";
 
 interface ExpenseListHeaderProps {
   searchLineParams: ControlParams<string>;
+  sortsAndFiltersButtonCallback?: () => void;
 }
 
-const ExpenseListHeader = ({searchLineParams}: ExpenseListHeaderProps) => {
+const ExpenseListHeader = ({
+  sortsAndFiltersButtonCallback,
+  searchLineParams,
+}: ExpenseListHeaderProps) => {
   return (
     <div className={classes.ExpenseListHeader}>
-      <div className={classes.ExpenseListHeader__sortsAndFiltersButton}>
+      <div
+        onClick={e => {
+          e.nativeEvent.stopPropagation();
+          if (sortsAndFiltersButtonCallback) sortsAndFiltersButtonCallback();
+        }}
+        className={classes.ExpenseListHeader__sortsAndFiltersButton}>
         <SortsAndFiltersIcons />
       </div>
       <SearchLine

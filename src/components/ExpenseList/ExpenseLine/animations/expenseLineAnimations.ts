@@ -2,7 +2,7 @@ import classes from "../ExpenseLineStyle.module.scss";
 export function expand(
   line: HTMLElement,
   desiredHeight: number,
-): NodeJS.Timeout {
+): number {
   line.style.height = `${desiredHeight}px`;
   const timerId = setTimeout(() => {
     line.style.height = "";
@@ -14,7 +14,7 @@ export function expand(
 export function minimize(
   line: HTMLElement,
   desiredHeight: number,
-): NodeJS.Timeout {
+): number {
   line.style.height = `${line.clientHeight}px`;
   line.classList.remove(classes.ExpenseLine__open);
   setTimeout(() => {

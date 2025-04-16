@@ -25,6 +25,9 @@ $buttonsHeight: 60px;
       display: flex;
       justify-content: center;
       align-items: center;
+      .HistoryPage__addButton {
+        height: 40px;
+      }
     }
   }
   .HistoryPage__mainContent > *:nth-child(1) {
@@ -47,7 +50,6 @@ $buttonsHeight: 60px;
 }
 .HistoryPage.HistoryPage_addingExpense {
   .HistoryPage__mainContent {
-    // top: -100%;
     opacity: 0;
   }
   .HistoryPage__addExpenseWindow {

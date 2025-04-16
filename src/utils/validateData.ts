@@ -5,15 +5,15 @@ import {
 
 export function validateValue(
   value: string,
-  ValidationRequirements: ValidationRequirements<string>,
+  validationRequirements: ValidationRequirements<string>,
 ): StateWithValidation<string> {
   let isValueValid = true;
   let errMessage: null | string = null;
 
   if (value.trim() === "") {
-    isValueValid = !ValidationRequirements?.isRequired;
-  } else {
-    for (const v of ValidationRequirements.validations) {
+    isValueValid = !validationRequirements?.isRequired;
+  } else if (validationRequirements.validations) {
+    for (const v of validationRequirements.validations) {
       if (!v.callbak(value)) {
         isValueValid = false;
         errMessage = v.message ?? null;

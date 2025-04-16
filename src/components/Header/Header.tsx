@@ -1,4 +1,3 @@
-import React from "react";
 import {ControlParams} from "../../types/ControlParamsType";
 import classes from "./HeaderStyle.module.scss";
 import Toolbar from "./Toolbar/Toolbar";

@@ -1,14 +1,40 @@
 @import "../../variables.scss";
 $headerHeigth: 40px;
+$paddingTop: 16px;
+$horizontalPadding: 5px;
+$gap: 16px;
+$horizontalBorderHeight: 2px;
 
 .ExpenseList {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 16px 5px 0 5px;
+  gap: $gap;
+  padding: $paddingTop $horizontalPadding 0 $horizontalPadding;
   flex-shrink: 1;
+  .ExpenseList__sortsAndFilters {
+    position: absolute;
+    z-index: 2;
+    top: calc($headerHeigth + $paddingTop + $gap);
+    left: 0;
+    width: 375px;
+    height: calc(
+      100% - ($headerHeigth + $paddingTop + $gap + 2 * $horizontalBorderHeight)
+    );
+    transform: translateX(-100%);
+    transition:
+      opacity 0.5s ease,
+      left 0.5s ease,
+      transform 0.5s ease;
+    opacity: 0;
+  }
+  .ExpenseList__sortsAndFilters_open {
+    left: $horizontalPadding;
+    transform: none;
+    opacity: 1;
+  }
   .ExpenseList__list {
     width: 100%;
     display: flex;
@@ -18,7 +44,7 @@ $headerHeigth: 40px;
 
     .ExpenseList__listBorder {
       width: 100%;
-      height: 2px;
+      height: $horizontalBorderHeight;
       border: none;
       border-radius: 1px;
       flex-shrink: 0;
